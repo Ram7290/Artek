@@ -22,16 +22,16 @@ export function PartnersCarousel() {
         </p>
       </div>
       <div
-        className="relative mt-9 [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]"
+        className="container-page relative mt-9 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]"
       >
         <ul
-          className="marquee-track mx-auto flex w-max animate-marquee items-center gap-14 px-14 motion-safe:animate-marquee"
+          className="marquee-track mx-auto flex w-max animate-marquee items-center gap-14 px-14"
           aria-label="Technology brands ARTEK works with"
         >
           {track.map((brand, i) => (
             <li key={`${brand.name}-${i}`} aria-hidden={i >= partners.length} className="shrink-0">
               <span
-                className="select-none text-xl font-bold tracking-tight text-slate-300 transition-all duration-300 hover:text-accent-600"
+                className="select-none text-xl font-semibold tracking-tight text-ink/50 transition-all duration-300 hover:text-accent-600"
                 /* wordmark placeholder — swap for image asset when available */
               >
                 {brand.name}
