@@ -1,4 +1,4 @@
-import { ArrowRight, Phone } from "lucide-react";
+import { ArrowRight, Phone, ShieldCheck, BadgeCheck, Users, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { HeroCarousel } from "@/components/home/HeroCarousel";
 import { heroSlides } from "@/data/heroSlides";
@@ -19,9 +19,9 @@ export function HeroSection() {
       <div className="container-page grid items-center gap-10 pt-28 pb-12 sm:pt-32 sm:pb-16 lg:grid-cols-[44fr_56fr] lg:gap-14 lg:pt-24 lg:pb-20 xl:pt-28 xl:pb-24">
         {/* LEFT — content */}
         <div className="order-1">
-          <p className="animate-fade-up inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.16em] text-azure">
-            <span className="inline-block h-px w-6 bg-azure/60" aria-hidden="true" />
-            Integrated Security &amp; Technology Solutions
+          <p className="animate-fade-up inline-flex flex-wrap items-center gap-2 text-[10.5px] font-bold uppercase tracking-[0.14em] text-azure">
+            <ShieldCheck className="size-3.5 shrink-0" aria-hidden="true" />
+            {company.heroEyebrow}
           </p>
           <h1
             id="hero-heading"
@@ -65,9 +65,44 @@ export function HeroSection() {
             </a>
           </div>
 
+          {/* credibility chip row — SIRA leads as the primary credential */}
+          <ul
+            className="animate-fade-up mt-8 flex flex-wrap items-center gap-2"
+            style={{ animationDelay: "270ms" }}
+          >
+            {company.heroCredentials.map((c) =>
+              c.primary ? (
+                <li key={c.label}>
+                  <span className="inline-flex h-8 items-center gap-2 rounded-full border border-azure/30 bg-white py-0.5 pl-1.5 pr-3.5 shadow-sm shadow-azure/10">
+                    <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-azure text-white">
+                      <ShieldCheck className="size-3" aria-hidden="true" />
+                    </span>
+                    <span className="text-[12.5px] font-bold text-azure-deep">
+                      {c.label}
+                    </span>
+                  </span>
+                </li>
+              ) : (
+                <li
+                  key={c.label}
+                  className="text-ink/60 inline-flex h-8 items-center gap-1.5 rounded-full border border-hairline bg-white/70 px-3 text-[12.5px] font-semibold"
+                >
+                  {c.icon === "badge-check" && (
+                    <BadgeCheck className="size-3.5 shrink-0" aria-hidden="true" />
+                  )}
+                  {c.icon === "users" && <Users className="size-3.5 shrink-0" aria-hidden="true" />}
+                  {c.icon === "map-pin" && (
+                    <MapPin className="size-3.5 shrink-0" aria-hidden="true" />
+                  )}
+                  {c.label}
+                </li>
+              ),
+            )}
+          </ul>
+
           <p
-            className="animate-fade-up text-ink/60 mt-8 text-[11px] font-semibold uppercase tracking-[0.22em]"
-            style={{ animationDelay: "280ms" }}
+            className="animate-fade-up text-ink/60 mt-4 text-[11px] font-semibold uppercase tracking-[0.22em]"
+            style={{ animationDelay: "330ms" }}
           >
             CCTV <span aria-hidden="true">·</span> Biometrics{" "}
             <span aria-hidden="true">·</span> Access Control{" "}

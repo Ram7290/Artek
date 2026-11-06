@@ -15,6 +15,14 @@
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
+/** Credential chip for the hero credibility row. `primary` = SIRA (leader) */
+export interface HeroCredential {
+  label: string;
+  icon: "shield-check" | "badge-check" | "users" | "map-pin";
+  /** visually dominant chip (only SIRA should use this) */
+  primary?: boolean;
+}
+
 export interface CompanyDetails {
   /** Trading name */
   name: string;
@@ -23,6 +31,10 @@ export interface CompanyDetails {
   tagline: string;
   positioning: string;
   heroDescription: string;
+  /** Small accent label above the H1 (customer-supplied wording) */
+  heroEyebrow: string;
+  /** Hero credibility chips under the CTAs (customer-supplied claims) */
+  heroCredentials: readonly HeroCredential[];
   phoneDisplay: string;
   phoneHref: string;
   /** Verified office address — null until confirmed by the company */
@@ -44,6 +56,13 @@ export const company: CompanyDetails = {
     "A Dubai-based IT integrated systems company — IT solutions, CCTV and networking for businesses in Dubai.",
   heroDescription:
     "Artek Computers LLC is an IT integrated systems company. We provide end-to-end solutions, from computers and networks to CCTV, cabling and cloud, for customers from residential to corporate.",
+  heroEyebrow: "SIRA Approved CCTV & IT Services Company in Dubai",
+  heroCredentials: [
+    { label: "SIRA Certified", icon: "shield-check", primary: true },
+    { label: "Dubai Police Approved", icon: "badge-check" },
+    { label: "2500+ UAE Businesses", icon: "users" },
+    { label: "Computer Street, Bur Dubai", icon: "map-pin" },
+  ],
   phoneDisplay: "+971 4 379 7128",
   phoneHref: "tel:+97143797128",
   address: null, // ← populate with the verified office address

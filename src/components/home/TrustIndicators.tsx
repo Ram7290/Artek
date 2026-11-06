@@ -1,4 +1,5 @@
-import { BadgeCheck, ShieldCheck, Clock, Users, Headset } from "lucide-react";
+import { Link } from "react-router-dom";
+import { BadgeCheck, ShieldCheck, Clock, Users, Headset, ArrowUpRight } from "lucide-react";
 import { trustClaims } from "@/data/company";
 import { cn } from "@/lib/utils";
 
@@ -9,6 +10,11 @@ const ICONS = {
   users: Users,
   headset: Headset,
 } as const;
+
+/** route each claim links to (only where a real page exists to back it) */
+const CLAIM_LINKS: Partial<Record<(typeof trustClaims)[number]["id"], string>> = {
+  sira: "/solutions/sira-approved-cctv-dubai",
+};
 
 /**
  * Trust indicators (homepage Section 2).
@@ -25,14 +31,55 @@ export function TrustIndicators() {
         <ul className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-slate-100 sm:grid-cols-3 lg:grid-cols-5">
           {trustClaims.map((claim, i) => {
             const Icon = ICONS[claim.id === "dubai-police" ? "shield" : claim.id === "support" ? "headset" : claim.id === "years" ? "clock" : claim.id === "clients" ? "users" : "badge-check"];
+            const to = CLAIM_LINKS[claim.id];
+            const emphasized = claim.id === "sira";
+            const cell = (
+              <>
+                {emphasized ? (
+                  <span className="bg-azure/10 relative mx-auto flex size-9 items-center justify-center rounded-full">
+                    <ShieldCheck className="text-azure-deep size-5" aria-hidden="true" />
+                    <BadgeCheck
+                      className="absolute -right-1 -bottom-1 size-4 rounded-full bg-white text-azure"
+                      aria-hidden="true"
+                    />
+                  </span>
+                ) : (
+                  <Icon className="text-accent-600 mx-auto size-6" aria-hidden="true" />
+                )}
+                <p
+                  className={cn(
+                    "mt-2 text-sm font-semibold",
+                    emphasized ? "text-azure-deep" : "text-slate-900",
+                  )}
+                >
+                  {claim.label}
+                  {to && (
+                    <ArrowUpRight className="text-azure-deep/60 ml-1 inline size-3.5 opacity-0 transition-opacity group-hover:opacity-100" aria-hidden="true" />
+                  )}
+                </p>
+                {emphasized && (
+                  <p className="text-azure-deep/70 mt-0.5 text-[11px] font-semibold">See what SIRA approval means →</p>
+                )}
+                {!emphasized && (
+                  <p className="mt-0.5 text-xs leading-snug text-slate-500">{claim.detail}</p>
+                )}
+              </>
+            );
             return (
               <li
                 key={claim.id}
-                className={cn("bg-white p-5 text-center", i === 0 && "col-span-2 sm:col-span-1")}
+                className={cn("relative bg-white p-5 text-center", i === 0 && "col-span-2 sm:col-span-1")}
               >
-                <Icon className="mx-auto size-6 text-accent-600" aria-hidden="true" />
-                <p className="mt-2 text-sm font-semibold text-slate-900">{claim.label}</p>
-                <p className="mt-0.5 text-xs leading-snug text-slate-500">{claim.detail}</p>
+                {to ? (
+                  <Link
+                    to={to}
+                    className="group flex h-full flex-col items-center rounded-lg transition-colors hover:bg-mist/70"
+                  >
+                    {cell}
+                  </Link>
+                ) : (
+                  <div className="flex h-full flex-col items-center">{cell}</div>
+                )}
               </li>
             );
           })}
