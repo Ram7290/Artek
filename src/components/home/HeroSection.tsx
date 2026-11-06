@@ -51,7 +51,7 @@ export function HeroSection() {
               height="48"
               patternUnits="userSpaceOnUse"
             >
-              <path d="M48 0H0V48" fill="none" stroke="#0C1B3A" strokeOpacity="0.055" strokeWidth="1" />
+              <path d="M48 0H0V48" fill="none" stroke="#101D35" strokeOpacity="0.055" strokeWidth="1" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#hero-fine-grid)" />

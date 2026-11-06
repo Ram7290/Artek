@@ -108,11 +108,11 @@ export interface ServiceArea {
   combos?: readonly LocationService[];
 }
 
-export interface Partner {
-  name: string;
-  /** true when an official logo asset exists in /public/logos; false = text wordmark placeholder */
-  hasAsset: boolean;
-  status: ClaimStatus;
+export interface PartnerGroup {
+  /** Category heading shown between brand chips (e.g. "ELV & Security") */
+  label: string;
+  /** Brand names — text wordmark placeholders pending logo assets */
+  brands: readonly string[];
 }
 
 export interface Industry {

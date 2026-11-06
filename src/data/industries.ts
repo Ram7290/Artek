@@ -1,4 +1,4 @@
-import type { Industry, Partner, ProductCategory } from "@/types";
+import type { Industry, PartnerGroup, ProductCategory } from "@/types";
 
 /** Industries page — swap `visual: "gradient"` for project photography when supplied. */
 export const industries: readonly Industry[] = [
@@ -128,22 +128,33 @@ export const getIndustryBySlug = (slug: string) =>
   industries.find((i) => i.slug === slug);
 
 /**
- * ── Partner logo carousel ──
- * Suggested entries from the client brief. status must flip to
- * "confirmed-provided-by-client" only for brands ARTEK genuinely supplies
- * or has permission to name. Entries render as configurable text wordmark
- * placeholders until real logo assets are supplied in /public/logos.
+ * ── Partner brand groups (small-chip marquee) ──
+ * Brand list supplied in the client brief; nothing here is confirmed — every
+ * entry is a text wordmark placeholder pending real logo assets in
+ * /public/logos AND verified partner status. Keep flags above the fold of
+ * production review (see README "Claims to verify").
  */
-export const partners: readonly Partner[] = [
-  { name: "Microsoft", hasAsset: false, status: "pending-verification" },
-  { name: "Hikvision", hasAsset: false, status: "pending-verification" },
-  { name: "Dahua", hasAsset: false, status: "pending-verification" },
-  { name: "HP", hasAsset: false, status: "pending-verification" },
-  { name: "Dell Technologies", hasAsset: false, status: "pending-verification" },
-  { name: "Cisco", hasAsset: false, status: "pending-verification" },
-  { name: "Lenovo", hasAsset: false, status: "pending-verification" },
-  { name: "TP-Link", hasAsset: false, status: "pending-verification" },
-  { name: "Ubiquiti", hasAsset: false, status: "pending-verification" },
+export const partnerGroups: readonly PartnerGroup[] = [
+  {
+    label: "Cabling & Connectivity",
+    brands: ["Belden", "Panduit", "ExTell", "Corning", "3M", "Opterna", "Norden", "Dconnect", "Molex", "Kuwes", "Techlogiks"],
+  },
+  {
+    label: "Networking & IT Infrastructure",
+    brands: ["Cisco", "Fortinet", "SonicWall", "Ubiquiti", "Aruba", "Ruckus", "D-Link", "Linksys", "TP-Link", "MikroTik", "Grandstream", "EnGenius"],
+  },
+  {
+    label: "ELV & Security",
+    brands: ["Hikvision", "Dahua", "Axis", "Toten"],
+  },
+  {
+    label: "Power & Cooling",
+    brands: ["APC", "Eaton", "Schneider"],
+  },
+  {
+    label: "Computers, Storage & Peripherals",
+    brands: ["Dell", "HP", "Lenovo", "Apple", "Acer", "ASUS", "Samsung", "Synology", "QNAP", "WD", "Seagate", "Epson", "Brother", "Logitech", "Microsoft", "Kaspersky", "Symantec"],
+  },
 ];
 
 /** PRODUCT URL categories — descriptions only, no invented specs or SKUs. */

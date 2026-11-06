@@ -1,41 +1,59 @@
-import { partners } from "@/data/industries";
+import { partnerGroups } from "@/data/industries";
+import { cn } from "@/lib/utils";
 
 /**
- * Partner logo carousel (homepage Section 4).
+ * Partner brand chips (homepage Section 4) — small chips on a moving marquee.
  *
- * IMPORTANT: entries are placeholders (text wordmarks) pending real logo
- * assets and confirmed partner status — see data/industries.ts. Replace the
- * span with <img src="/logos/brand.webp"> once assets exist; keep grayscale
- * → colour on hover via CSS filter.
+ * IMPORTANT: brand names are client-brief placeholders pending real logo
+ * assets AND confirmed partner status — see data/industries.ts. Replace the
+ * chip span with <img src="/logos/brand.webp"> once assets exist.
  *
- * One shared CSS keyframe animation (marquee), duplicated track for a
- * seamless loop, pauses on hover, disabled under prefers-reduced-motion.
+ * One shared CSS keyframe animation (marquee—~60s: the track is much wider
+ * than the old 9-logo version), duplicated track for a seamless loop, pauses
+ * on hover, disabled under prefers-reduced-motion.
  */
+
+type TrackItem =
+  | { key: string; kind: "label"; text: string }
+  | { key: string; kind: "chip"; text: string };
+
+const trackBase: TrackItem[] = partnerGroups.flatMap((g) => [
+  { key: `lbl:${g.label}`, kind: "label" as const, text: g.label },
+  ...g.brands.map((b) => ({ key: `chip:${g.label}:${b}`, kind: "chip" as const, text: b })),
+]);
+const track = [...trackBase, ...trackBase];
+
+const CHIP =
+  "inline-flex items-center rounded-full border border-hairline bg-white px-3.5 py-1.5 text-[13px] font-semibold text-ink/70 select-none transition-colors duration-300 hover:border-accent-600/60 hover:text-accent-600";
+const LABEL =
+  "shrink-0 select-none py-1.5 text-[10.5px] font-extrabold uppercase tracking-[0.18em] text-ink/30";
+
 export function PartnersCarousel() {
-  const track = [...partners, ...partners];
   return (
-    <section className="overflow-hidden bg-slate-safe py-14" aria-label="Technology partners">
+    <section className="bg-slate-safe py-14" aria-label="Technology partners">
       <div className="container-page">
-        <h2 className="text-center text-2xl font-bold text-slate-900 sm:text-3xl">Trusted Technology Partners</h2>
-        <p className="mt-3 text-center text-sm text-slate-600 sm:text-base">
+        <h2 className="text-center text-2xl font-bold text-ink sm:text-3xl">Trusted Technology Partners</h2>
+        <p className="mt-3 text-center text-sm text-ink/70 sm:text-base">
           Working with established technology brands to deliver reliable IT and security solutions.
         </p>
       </div>
       <div
-        className="container-page relative mt-9 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]"
+        className="relative mt-9 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"
       >
         <ul
-          className="marquee-track mx-auto flex w-max animate-marquee items-center gap-14 px-14"
-          aria-label="Technology brands ARTEK works with"
+          className="marquee-track mx-auto flex w-max animate-marquee items-center gap-2.5 px-6"
+          style={{ animationDuration: "60s" }}
+          aria-label="Technology brands ARTEK works with, by category"
         >
-          {track.map((brand, i) => (
-            <li key={`${brand.name}-${i}`} aria-hidden={i >= partners.length} className="shrink-0">
-              <span
-                className="select-none text-xl font-semibold tracking-tight text-ink/50 transition-all duration-300 hover:text-accent-600"
-                /* wordmark placeholder — swap for image asset when available */
-              >
-                {brand.name}
-              </span>
+          {track.map((item, i) => (
+            <li key={item.key} aria-hidden={i >= trackBase.length} className={cn("flex shrink-0 items-center", item.kind === "chip" && "px-1")}>
+              {item.kind === "chip" ? (
+                <span className={CHIP} /* wordmark placeholder — swap for image asset when available */>
+                  {item.text}
+                </span>
+              ) : (
+                <span className={LABEL}>{item.text}</span>
+              )}
             </li>
           ))}
         </ul>

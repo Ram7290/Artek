@@ -4,30 +4,30 @@
 @theme {
   --font-sans: "Manrope Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
-  /* Navy & Gold palette — premium scheme (dark deep-navy sections, warm
-     off-white lights, gold accents). Deep "old gold" fills keep white text
-     accessible; bright gold (accent-400) is reserved for dark backgrounds. */
-  --color-mist: #faf9f6;
-  --color-mist-2: #f1efe9;
-  --color-ink: #0c1b3a;
-  --color-ink-soft: #2b446f;
-  --color-azure: #8f711c;
-  --color-azure-deep: #755b0f;
-  --color-hairline: #e9e4d6;
+  /* Blue & light-blue palette — saturated blue-tinted lights (not washed-out
+     pale), vivid azure accents, deep blue-navy darks. Sky (accent-400) is
+     reserved for dark backgrounds; azure-deep fills keep white text readable. */
+  --color-mist: #ECF2FA;
+  --color-mist-2: #DDE8F5;
+  --color-ink: #101D35;
+  --color-ink-soft: #2A3C5E;
+  --color-azure: #3478F6;
+  --color-azure-deep: #2563EB;
+  --color-hairline: #CDDAEA;
 
   /* Brand palette — ARTEK design tokens (inner pages) */
-  --color-navy-950: #07122b;
-  --color-navy-900: #0c1b3a;
-  --color-navy-850: #13284f;
-  --color-navy-700: #1e3a5f;
-  --color-accent-700: #755b0f;
-  --color-accent-600: #8f711c;
-  --color-accent-500: #b8922e;
-  --color-accent-400: #d7b44c;
-  --color-slate-safe: #faf9f6;
+  --color-navy-950: #0A1428;
+  --color-navy-900: #101D35;
+  --color-navy-850: #16213B;
+  --color-navy-700: #1E293B;
+  --color-accent-700: #2563EB;
+  --color-accent-600: #3478F6;
+  --color-accent-500: #3B82F6;
+  --color-accent-400: #38BDF8;
+  --color-slate-safe: #ECF2FA;
 
   --shadow-card: 0 1px 2px rgb(15 23 42 / 0.06), 0 4px 16px rgb(15 23 42 / 0.08);
-  --shadow-card-hover: 0 2px 4px rgb(15 23 42 / 0.08), 0 12px 32px rgb(143 113 28 / 0.16);
+  --shadow-card-hover: 0 2px 4px rgb(15 23 42 / 0.08), 0 12px 32px rgb(37 99 235 / 0.16);
 
   --animate-float: float 7s ease-in-out infinite;
   --animate-float-slow: float 10s ease-in-out infinite;
@@ -136,14 +136,14 @@ video {
 
 /* Focus visibility for keyboard users */
 :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
-  outline: 2px solid #8f711c;
+  outline: 2px solid #3478F6;
   outline-offset: 2px;
   border-radius: 4px;
 }
 
 ::selection {
-  background: #d7b44c;
-  color: #0c1b3a;
+  background: #38BDF8;
+  color: #101D35;
 }
 
 .container-page {
@@ -202,7 +202,7 @@ video {
   left: -9999px;
   top: 0;
   z-index: 100;
-  background: #07122b;
+  background: #0B1220;
   color: #fff;
   padding: 0.5rem 1rem;
   border-radius: 0 0 0.5rem 0;
