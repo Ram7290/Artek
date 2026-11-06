@@ -22,6 +22,21 @@ export interface BreadcrumbItem {
   to: string;
 }
 
+/** Hero carousel slide (see src/data/heroSlides.ts) */
+export interface HeroSlide {
+  /** stable key */
+  id: string;
+  /** small uppercase overlay label, e.g. VIDEO SURVEILLANCE */
+  category: string;
+  title: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+  /** intrinsic dimensions of the image file — prevents layout shift */
+  width: number;
+  height: number;
+}
+
 export interface Faq {
   question: string;
   answer: string;

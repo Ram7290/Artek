@@ -13,6 +13,7 @@ import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 import { resolvePageSeo, ALL_SEO_PATHS } from "../src/data/seo.ts";
+import { heroPreloadImage } from "../src/data/heroSlides.ts";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -59,6 +60,7 @@ async function main() {
         path: seo.path,
         noindex: false,
         jsonLd: seo.jsonLd ?? [],
+        preloadImage: route === "/" ? heroPreloadImage.image : undefined,
       });
     }
     const outPath = is404
@@ -76,7 +78,7 @@ function escapeHtml(s) {
   return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-function injectSeo(html, { title, description, path: pagePath, jsonLd, noindex }) {
+function injectSeo(html, { title, description, path: pagePath, jsonLd, noindex, preloadImage }) {
   const safeTitle = escapeHtml(title);
   const safeDesc = escapeHtml(description);
   /* replace the template's fallback title + description + canonical */
@@ -96,10 +98,15 @@ function injectSeo(html, { title, description, path: pagePath, jsonLd, noindex }
     .map((o) => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, "\\u003c")}</script>`)
     .join("\n    ");
 
+  /* LCP preload (homepage): first carousel slide image */
+  const preloads = preloadImage
+    ? `<link rel="preload" as="image" href="${escapeHtml(preloadImage)}" fetchpriority="high" />`
+    : "";
+
   const marker = "</head>";
   const idx = html.lastIndexOf(marker);
   if (idx === -1) return html;
-  return html.slice(0, idx) + "\n    " + og + "\n    " + ld + "\n  " + html.slice(idx);
+  return html.slice(0, idx) + "\n    " + og + "\n    " + (preloads ? preloads + "\n    " : "") + ld + "\n  " + html.slice(idx);
 }
 
 

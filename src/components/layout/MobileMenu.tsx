@@ -7,13 +7,16 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 /** Mobile navigation: slide-in Radix Dialog sheet, keyboard accessible (Esc/close). */
-export function MobileMenu() {
+export function MobileMenu({ light = false }: { light?: boolean }) {
   const close = () => document.dispatchEvent(new Event("artek:menu-close"));
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
         <button
-          className="inline-flex size-10 items-center justify-center rounded-lg text-white lg:hidden"
+          className={cn(
+            "inline-flex size-10 items-center justify-center rounded-lg lg:hidden",
+            light ? "text-ink hover:bg-mist-2" : "text-white hover:bg-white/10",
+          )}
           aria-label="Open menu"
         >
           <Menu className="size-6" />
