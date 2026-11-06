@@ -31,7 +31,7 @@ export function HeroSection() {
           className="absolute left-[-14%] top-[4%] h-[46rem] w-[46rem] rounded-full"
           style={{
             background:
-              "radial-gradient(closest-side, rgba(52,120,246,0.10), rgba(52,120,246,0.03) 55%, rgba(52,120,246,0) 100%)",
+              "radial-gradient(closest-side, rgba(215,180,76,0.12), rgba(215,180,76,0.04) 55%, rgba(215,180,76,0) 100%)",
           }}
         />
         {/* ④ hairline grid, masked toward the edges */}
@@ -51,7 +51,7 @@ export function HeroSection() {
               height="48"
               patternUnits="userSpaceOnUse"
             >
-              <path d="M48 0H0V48" fill="none" stroke="#101D35" strokeOpacity="0.055" strokeWidth="1" />
+              <path d="M48 0H0V48" fill="none" stroke="#0C1B3A" strokeOpacity="0.055" strokeWidth="1" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#hero-fine-grid)" />

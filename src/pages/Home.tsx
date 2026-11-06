@@ -6,7 +6,7 @@ import { WhyChooseArtek } from "@/components/home/WhyChooseArtek";
 import { IndustriesSection } from "@/components/home/IndustriesSection";
 import { LocationsSection } from "@/components/home/LocationsSection";
 import { FAQSection } from "@/components/home/FAQSection";
-import { FinalCTA } from "@/components/home/FinalCTA";
+// import { FinalCTA } from "@/components/home/FinalCTA";
 
 /** Homepage — exact section order as specified. */
 export default function Home() {
@@ -14,13 +14,13 @@ export default function Home() {
     <article>
       <HeroSection />
       <TrustIndicators />
+      <WhyChooseArtek />
       <SolutionsSection />
       <PartnersCarousel />
-      <WhyChooseArtek />
       <IndustriesSection />
       <LocationsSection />
       <FAQSection />
-      <FinalCTA />
+      {/* <FinalCTA /> */}
     </article>
   );
 }

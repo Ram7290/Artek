@@ -115,7 +115,7 @@ export const trustClaims: readonly TrustClaimEntry[] = [
   },
   {
     id: "clients",
-    label: "500+ Clients Served",
+    label: "2500+ Clients Served",
     detail: "Residential, commercial and corporate.",
     status: "pending-verification",
   },

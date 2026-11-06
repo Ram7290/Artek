@@ -3,11 +3,18 @@ import { useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SEOHead } from "@/components/common/SEOHead";
+import { getLenis, initLenis } from "@/lib/lenis";
 
 export function MainLayout() {
   const { pathname } = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
+    initLenis();
+  }, []);
+  useEffect(() => {
+    // Lenis drives scroll position virtually — route resets must go through it.
+    const lenis = getLenis();
+    if (lenis) lenis.scrollTo(0, { immediate: true, force: true });
+    else window.scrollTo(0, 0);
   }, [pathname]);
 
   return (

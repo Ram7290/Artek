@@ -20,11 +20,11 @@ const ICONS = {
 
 const GRADIENTS = [
   "from-navy-950 via-accent-700 to-accent-400",
-  "from-navy-900 via-accent-600 to-sky-400",
+  "from-navy-900 via-accent-600 to-accent-400",
   "from-slate-800 via-accent-700 to-accent-500",
   "from-navy-950 via-accent-600 to-accent-400",
-  "from-navy-900 via-accent-500 to-sky-400",
-  "from-slate-900 via-accent-700 to-sky-500",
+  "from-navy-900 via-accent-500 to-accent-400",
+  "from-slate-900 via-accent-700 to-accent-500",
 ];
 
 /** Homepage Section 6 — industries (placeholder gradients until project photos are supplied). */
