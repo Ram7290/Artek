@@ -30,16 +30,16 @@ export default function Solutions() {
             ))}
           </div>
 
-          <h2 className="mt-16 text-2xl font-bold text-slate-900">Popular CCTV services</h2>
+          <h2 className="mt-16 text-2xl font-bold text-ink">Popular CCTV services</h2>
           <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {extras.map((s) => (
               <li key={s.slug}>
                 <Link
                   to={`/solutions/${s.slug}`}
-                  className="block rounded-lg border border-slate-200 bg-white p-4 text-sm font-medium text-slate-800 transition-colors hover:border-accent-600/50 hover:text-accent-600"
+                  className="block rounded-lg border border-white/10 bg-mist-2 p-4 text-sm font-medium text-slate-200 transition-colors hover:border-accent-600/50 hover:text-accent-600"
                 >
                   {s.name}
-                  <span className="mt-1 block text-xs font-normal text-slate-500">{s.shortDescription.slice(0, 64)}…</span>
+                  <span className="mt-1 block text-xs font-normal text-slate-400">{s.shortDescription.slice(0, 64)}…</span>
                 </Link>
               </li>
             ))}

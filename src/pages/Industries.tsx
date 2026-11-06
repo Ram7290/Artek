@@ -29,7 +29,7 @@ export default function Industries() {
           </p>
         </div>
       </section>
-      <section className="bg-white py-14 sm:py-20">
+      <section className="bg-mist-2 py-14 sm:py-20">
         <div className="container-page">
           <SectionHeading
             align="left"
@@ -43,13 +43,13 @@ export default function Industries() {
                 <RevealBox as="li" key={ind.slug} delay={(i % 3) * 70}>
                   <Link
                     to={`/industries/${ind.slug}`}
-                    className="group flex h-full flex-col rounded-xl border border-slate-200 p-6 transition-colors hover:border-accent-600/50"
+                    className="group flex h-full flex-col rounded-xl border border-white/10 p-6 transition-colors hover:border-accent-600/50"
                   >
                     <span className="flex size-11 items-center justify-center rounded-lg bg-accent-600/10">
                       <Icon className="size-5 text-accent-600" aria-hidden="true" />
                     </span>
-                    <h2 className="mt-4 text-lg font-semibold text-slate-900 group-hover:text-accent-600">{ind.name}</h2>
-                    <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{ind.description}</p>
+                    <h2 className="mt-4 text-lg font-semibold text-ink group-hover:text-accent-600">{ind.name}</h2>
+                    <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-300">{ind.description}</p>
                     <span className="mt-4 text-xs font-medium text-accent-600">Read more →</span>
                   </Link>
                 </RevealBox>

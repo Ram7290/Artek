@@ -24,7 +24,7 @@ const trackBase: TrackItem[] = partnerGroups.flatMap((g) => [
 const track = [...trackBase, ...trackBase];
 
 const CHIP =
-  "inline-flex items-center rounded-full border border-hairline bg-white px-3.5 py-1.5 text-[13px] font-semibold text-ink/70 select-none transition-colors duration-300 hover:border-accent-600/60 hover:text-accent-600";
+  "inline-flex items-center rounded-full border border-hairline bg-mist-2 px-3.5 py-1.5 text-[13px] font-semibold text-ink/70 select-none transition-colors duration-300 hover:border-accent-600/60 hover:text-accent-600";
 const LABEL =
   "shrink-0 select-none py-1.5 text-[10.5px] font-extrabold uppercase tracking-[0.18em] text-ink/30";
 

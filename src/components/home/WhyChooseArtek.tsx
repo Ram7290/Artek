@@ -75,7 +75,7 @@ export function WhyChooseArtek() {
                     : undefined
                 }
               >
-                <div className="group relative h-full overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-accent-600/50 hover:shadow-card-hover sm:p-7">
+                <div className="group relative h-full overflow-hidden rounded-2xl border border-white/10 bg-mist-2 p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-accent-600/50 hover:shadow-card-hover sm:p-7">
                   {/* Hairline sweep on hover */}
                   <span
                     aria-hidden="true"
@@ -89,8 +89,8 @@ export function WhyChooseArtek() {
                       {num}
                     </span>
                   </div>
-                  <h3 className="mt-5 text-lg font-semibold text-slate-900">{f.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{f.body}</p>
+                  <h3 className="mt-5 text-lg font-semibold text-ink">{f.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-300">{f.body}</p>
                 </div>
               </RevealBox>
             );

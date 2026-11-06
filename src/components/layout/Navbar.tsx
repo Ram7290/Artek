@@ -21,7 +21,7 @@ export function Navbar() {
   const linkCls = (isActive: boolean) =>
     cn(
       "inline-flex items-center rounded-lg px-3 py-2 text-sm font-medium outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-azure/60",
-      isActive ? "text-azure" : "text-slate-500 hover:text-ink",
+      isActive ? "text-azure" : "text-slate-400 hover:text-ink",
     );
 
   return (
@@ -33,8 +33,8 @@ export function Navbar() {
             className={cn(
               "flex h-16 items-center justify-between gap-4 rounded-2xl border px-4 transition-all duration-300 sm:px-6",
               scrolled
-                ? "border-hairline bg-white/90 shadow-lg shadow-ink/[0.08] backdrop-blur-xl"
-                : "border-white/70 bg-white/80 shadow-sm backdrop-blur-xl",
+                ? "border-hairline bg-white/10 shadow-lg shadow-ink/[0.08] backdrop-blur-xl"
+                : "border-white/70 bg-white/10 shadow-sm backdrop-blur-xl",
             )}
           >
             <Logo dark />
@@ -56,7 +56,7 @@ export function Navbar() {
             <div className="flex items-center gap-2">
               <Link
                 to="/contact"
-                className="group hidden items-center gap-1.5 rounded-lg bg-azure px-4 py-2.5 text-sm font-semibold text-white shadow-sm outline-none transition-colors duration-200 hover:bg-azure-deep focus-visible:ring-2 focus-visible:ring-ink/20 sm:inline-flex"
+                className="group hidden items-center gap-1.5 rounded-lg bg-azure px-4 py-2.5 text-sm font-semibold text-black shadow-sm outline-none transition-colors duration-200 hover:bg-azure-deep focus-visible:ring-2 focus-visible:ring-ink/20 sm:inline-flex"
               >
                 Get a Quote
                 <ArrowRight

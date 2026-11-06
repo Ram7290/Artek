@@ -43,7 +43,7 @@ export default function About() {
     <article>
       <header className="bg-navy-950 pb-14 pt-32 text-white sm:pb-16">
         <div className="container-page">
-          <div className="[&_a]:text-slate-400 [&_span]:text-slate-500">
+          <div className="[&_a]:text-slate-400 [&_span]:text-slate-400">
             <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "About Us", to: "/about" }]} />
           </div>
           <h1 className="mt-6 text-balance text-3xl font-bold tracking-tight sm:text-4xl">
@@ -56,18 +56,18 @@ export default function About() {
         </div>
       </header>
 
-      <section className="bg-white py-14 sm:py-20">
+      <section className="bg-mist-2 py-14 sm:py-20">
         <div className="container-page grid gap-12 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
           <div className="max-w-3xl space-y-10">
             <RevealBox>
-              <h2 className="text-2xl font-bold text-slate-900">Who we are</h2>
-              <p className="mt-4 leading-relaxed text-slate-600">
+              <h2 className="text-2xl font-bold text-ink">Who we are</h2>
+              <p className="mt-4 leading-relaxed text-slate-300">
                 Artek Computers LLC is an IT integrated systems company based in Dubai, United Arab
                 Emirates. We plan, supply, install and support complete technology environments —
                 computer systems, networks, surveillance, telephony and cloud — under one accountable
                 team.
               </p>
-              <p className="mt-4 leading-relaxed text-slate-600">
+              <p className="mt-4 leading-relaxed text-slate-300">
                 {/* TODO(Artek): confirm founding year and premises history before publishing */}
                 Our scope covers eight core services: {coreServices.map((s) => s.title.toLowerCase()).join(", ")} —
                 delivered for customers across {industries.length} industries and the UAE&apos;s
@@ -76,20 +76,20 @@ export default function About() {
             </RevealBox>
 
             <RevealBox>
-              <h2 className="text-2xl font-bold text-slate-900">What drives us</h2>
+              <h2 className="text-2xl font-bold text-ink">What drives us</h2>
               <ul className="mt-6 grid gap-5 sm:grid-cols-2">
                 {MILESTONES.map((m) => (
-                  <li key={m.title} className="rounded-xl border border-slate-200 p-5">
+                  <li key={m.title} className="rounded-xl border border-white/10 p-5">
                     <m.icon className="size-6 text-accent-600" strokeWidth={1.75} aria-hidden="true" />
-                    <h3 className="mt-3 font-semibold text-slate-900">{m.title}</h3>
-                    <p className="mt-1.5 text-sm text-slate-600">{m.body}</p>
+                    <h3 className="mt-3 font-semibold text-ink">{m.title}</h3>
+                    <p className="mt-1.5 text-sm text-slate-300">{m.body}</p>
                   </li>
                 ))}
               </ul>
             </RevealBox>
 
             <RevealBox>
-              <h2 className="text-2xl font-bold text-slate-900">How we work</h2>
+              <h2 className="text-2xl font-bold text-ink">How we work</h2>
               <ol className="mt-6 space-y-4">
                 {[
                   "Survey — we assess your site and requirement first, then quote.",
@@ -101,15 +101,15 @@ export default function About() {
                     <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-accent-600 text-sm font-bold text-white">
                       {i + 1}
                     </span>
-                    <p className="pt-1 text-sm text-slate-700">{step}</p>
+                    <p className="pt-1 text-sm text-slate-300">{step}</p>
                   </li>
                 ))}
               </ol>
             </RevealBox>
 
             <RevealBox className="rounded-xl bg-slate-safe p-6 text-center">
-              <h2 className="text-xl font-bold text-slate-900">Let&apos;s build something reliable together</h2>
-              <p className="mt-2 text-sm text-slate-600">Talk to our team about your site and requirements.</p>
+              <h2 className="text-xl font-bold text-ink">Let&apos;s build something reliable together</h2>
+              <p className="mt-2 text-sm text-slate-300">Talk to our team about your site and requirements.</p>
               <Button asChild className="mt-5">
                 <Link to="/contact">Request a Free Quote</Link>
               </Button>
@@ -117,31 +117,31 @@ export default function About() {
           </div>
 
           <aside className="space-y-6 lg:sticky lg:top-28 lg:self-start">
-            <div className="rounded-xl border border-slate-200 p-6">
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">At a glance</h2>
+            <div className="rounded-xl border border-white/10 p-6">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400">At a glance</h2>
               <dl className="mt-4 space-y-3 text-sm">
                 <div>
-                  <dt className="text-slate-500">Company</dt>
-                  <dd className="font-medium text-slate-900">{company.legalName}</dd>
+                  <dt className="text-slate-400">Company</dt>
+                  <dd className="font-medium text-ink">{company.legalName}</dd>
                 </div>
                 <div>
-                  <dt className="text-slate-500">Location</dt>
-                  <dd className="font-medium text-slate-900">{company.emirateOfOperation}</dd>
+                  <dt className="text-slate-400">Location</dt>
+                  <dd className="font-medium text-ink">{company.emirateOfOperation}</dd>
                 </div>
                 <div>
-                  <dt className="text-slate-500">Phone</dt>
-                  <dd className="font-medium text-slate-900">
+                  <dt className="text-slate-400">Phone</dt>
+                  <dd className="font-medium text-ink">
                     <a href={company.phoneHref} className="text-accent-600 hover:underline">{company.phoneDisplay}</a>
                   </dd>
                 </div>
               </dl>
             </div>
-            <div className="rounded-xl border border-slate-200 p-6">
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">Quick links</h2>
+            <div className="rounded-xl border border-white/10 p-6">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400">Quick links</h2>
               <ul className="mt-3 space-y-2.5 text-sm">
-                <li><Link to="/solutions" className="text-slate-800 hover:text-accent-600">Our solutions</Link></li>
-                <li><Link to="/industries" className="text-slate-800 hover:text-accent-600">Industries</Link></li>
-                <li><Link to="/locations" className="text-slate-800 hover:text-accent-600">Service locations</Link></li>
+                <li><Link to="/solutions" className="text-slate-200 hover:text-accent-600">Our solutions</Link></li>
+                <li><Link to="/industries" className="text-slate-200 hover:text-accent-600">Industries</Link></li>
+                <li><Link to="/locations" className="text-slate-200 hover:text-accent-600">Service locations</Link></li>
               </ul>
             </div>
           </aside>

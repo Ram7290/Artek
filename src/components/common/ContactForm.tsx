@@ -50,15 +50,15 @@ export function ContactForm({ className }: { className?: string }) {
     }
   });
 
-  const labelCls = "mb-1.5 block text-sm font-medium text-slate-800";
+  const labelCls = "mb-1.5 block text-sm font-medium text-slate-200";
   const errCls = "mt-1 text-xs text-red-600";
 
   if (result?.kind === "ok") {
     return (
       <div className={`rounded-xl border border-emerald-200 bg-emerald-50 p-8 text-center ${className ?? ""}`} role="status">
         <CheckCircle2 className="mx-auto size-10 text-emerald-600" aria-hidden="true" />
-        <h3 className="mt-4 text-lg font-semibold text-slate-900">Enquiry sent</h3>
-        <p className="mt-2 text-sm text-slate-600">
+        <h3 className="mt-4 text-lg font-semibold text-ink">Enquiry sent</h3>
+        <p className="mt-2 text-sm text-slate-300">
           Thank you — our team will get back to you shortly. For urgent matters call +971 4 379 7128.
         </p>
         <Button variant="outline" className="mt-5" onClick={() => setResult(null)}>
@@ -71,7 +71,7 @@ export function ContactForm({ className }: { className?: string }) {
   return (
     <form onSubmit={onSubmit} noValidate className={className} aria-label="Request a quote">
       {demoMode && (
-        <div className="mb-5 flex items-start gap-3 rounded-lg border border-blue-200 bg-blue-50 p-4 text-sm text-slate-700" role="note">
+        <div className="mb-5 flex items-start gap-3 rounded-lg border border-blue-200 bg-blue-50 p-4 text-sm text-slate-300" role="note">
           <Info className="mt-0.5 size-4 shrink-0 text-accent-600" aria-hidden="true" />
           <p>
             <strong className="font-semibold">Demo mode:</strong> form submission is not yet connected
@@ -170,10 +170,10 @@ export function ContactForm({ className }: { className?: string }) {
         </p>
       )}
       {result?.kind === "demo" && (
-        <p className="mt-4 flex items-start gap-2 rounded-lg border border-blue-200 bg-blue-50 p-4 text-sm text-slate-700" role="status">
+        <p className="mt-4 flex items-start gap-2 rounded-lg border border-blue-200 bg-blue-50 p-4 text-sm text-slate-300" role="status">
           <Info className="mt-0.5 size-4 shrink-0 text-accent-600" aria-hidden="true" />
           Demo mode — your details were validated but <strong className="font-semibold">not sent</strong>. Set
-          the submission endpoint in <code className="rounded bg-white px-1 py-0.5 text-xs">VITE_ENQUIRY_ENDPOINT</code> to enable live sending.
+          the submission endpoint in <code className="rounded bg-mist-2 px-1 py-0.5 text-xs">VITE_ENQUIRY_ENDPOINT</code> to enable live sending.
         </p>
       )}
 

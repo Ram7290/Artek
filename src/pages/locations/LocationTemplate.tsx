@@ -25,7 +25,7 @@ export function LocationTemplate() {
     <article>
       <header className="bg-navy-950 pb-14 pt-32 text-white sm:pb-16">
         <div className="container-page">
-          <div className="[&_a]:text-slate-400 [&_span]:text-slate-500">
+          <div className="[&_a]:text-slate-400 [&_span]:text-slate-400">
             <Breadcrumbs
               items={[
                 { label: "Home", to: "/" },
@@ -54,14 +54,14 @@ export function LocationTemplate() {
         </div>
       </header>
 
-      <div className="bg-white py-14 sm:py-20">
+      <div className="bg-mist-2 py-14 sm:py-20">
         <div className="container-page grid gap-12 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
           <div className="max-w-3xl space-y-12">
             <RevealBox>
-              <h2 className="text-2xl font-bold text-slate-900">What we deliver in {location.name}</h2>
+              <h2 className="text-2xl font-bold text-ink">What we deliver in {location.name}</h2>
               <ul className="mt-5 space-y-3">
                 {location.coverage.map((c) => (
-                  <li key={c} className="flex items-start gap-2.5 text-slate-700">
+                  <li key={c} className="flex items-start gap-2.5 text-slate-300">
                     <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-accent-600" aria-hidden="true" />
                     {c}
                   </li>
@@ -71,7 +71,7 @@ export function LocationTemplate() {
 
             {location.serviceNotes.length > 0 && (
               <RevealBox>
-                <h2 className="text-2xl font-bold text-slate-900">Service highlights</h2>
+                <h2 className="text-2xl font-bold text-ink">Service highlights</h2>
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">
                   {location.serviceNotes.map((note) => {
                     const svc = getServiceBySlug(note.service);
@@ -79,10 +79,10 @@ export function LocationTemplate() {
                       <Link
                         key={note.service}
                         to={`/solutions/${svc.slug}`}
-                        className="rounded-xl border border-slate-200 p-5 transition-colors hover:border-accent-600/50"
+                        className="rounded-xl border border-white/10 p-5 transition-colors hover:border-accent-600/50"
                       >
-                        <h3 className="font-semibold text-slate-900">{svc.title}</h3>
-                        <p className="mt-1.5 text-sm text-slate-600">{note.note}</p>
+                        <h3 className="font-semibold text-ink">{svc.title}</h3>
+                        <p className="mt-1.5 text-sm text-slate-300">{note.note}</p>
                       </Link>
                     ) : null;
                   })}
@@ -92,7 +92,7 @@ export function LocationTemplate() {
 
             {location.combos && location.combos.length > 0 && (
               <RevealBox>
-                <h2 className="text-2xl font-bold text-slate-900">Popular services in {location.name}</h2>
+                <h2 className="text-2xl font-bold text-ink">Popular services in {location.name}</h2>
                 <ul className="mt-6 space-y-4">
                   {location.combos.map((combo) => {
                     const svc = getServiceBySlug(combo.serviceSlug);
@@ -100,12 +100,12 @@ export function LocationTemplate() {
                       <li key={combo.serviceSlug}>
                         <Link
                           to={`/locations/${location.slug}/${combo.serviceSlug}`}
-                          className="block rounded-xl border border-slate-200 p-5 transition-colors hover:border-accent-600/50"
+                          className="block rounded-xl border border-white/10 p-5 transition-colors hover:border-accent-600/50"
                         >
-                          <h3 className="font-semibold text-slate-900">
+                          <h3 className="font-semibold text-ink">
                             {svc.name} in {location.name}
                           </h3>
-                          <p className="mt-1.5 text-sm text-slate-600">{combo.localPitch}</p>
+                          <p className="mt-1.5 text-sm text-slate-300">{combo.localPitch}</p>
                         </Link>
                       </li>
                     ) : null;
@@ -115,14 +115,14 @@ export function LocationTemplate() {
             )}
 
             <RevealBox>
-              <h2 className="text-2xl font-bold text-slate-900">Questions about {location.name}</h2>
+              <h2 className="text-2xl font-bold text-ink">Questions about {location.name}</h2>
               <FAQAccordion faqs={location.faqs} className="mt-6" />
             </RevealBox>
           </div>
 
           <aside className="space-y-6 lg:sticky lg:top-28 lg:self-start">
-            <nav aria-label="Other service locations" className="rounded-xl border border-slate-200 p-6">
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">Other locations</h2>
+            <nav aria-label="Other service locations" className="rounded-xl border border-white/10 p-6">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400">Other locations</h2>
               <ul className="mt-3 space-y-2.5 text-sm">
                 {locations
                   .filter((l) => l.slug !== location.slug)
@@ -130,7 +130,7 @@ export function LocationTemplate() {
                     <li key={l.slug}>
                       <Link
                         to={`/locations/${l.slug}`}
-                        className="font-medium text-slate-800 underline-offset-4 hover:text-accent-600 hover:underline"
+                        className="font-medium text-slate-200 underline-offset-4 hover:text-accent-600 hover:underline"
                       >
                         {l.name}
                       </Link>

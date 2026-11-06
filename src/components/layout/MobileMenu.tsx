@@ -41,8 +41,8 @@ export function MobileMenu() {
         </button>
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-40 bg-ink/40 backdrop-blur-sm" />
-        <Dialog.Content className="fixed inset-y-0 right-0 z-50 flex w-[88vw] max-w-sm flex-col border border-hairline bg-white shadow-2xl outline-none">
+        <Dialog.Overlay className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm" />
+        <Dialog.Content className="fixed inset-y-0 right-0 z-50 flex w-[88vw] max-w-sm flex-col border border-hairline bg-mist-2 shadow-2xl outline-none">
           <div className="flex items-center justify-between border-b border-hairline px-5 py-4">
             <Dialog.Title className="text-base font-semibold text-ink">Navigate</Dialog.Title>
             <Dialog.Close asChild>
@@ -63,7 +63,7 @@ export function MobileMenu() {
             <Dialog.Close asChild>
               <Link
                 to="/contact"
-                className="group flex items-center justify-center gap-2 rounded-xl bg-azure px-4 py-3.5 text-[15px] font-semibold text-white shadow-sm outline-none transition-colors hover:bg-azure-deep focus-visible:ring-2 focus-visible:ring-ink/20"
+                className="group flex items-center justify-center gap-2 rounded-xl bg-azure px-4 py-3.5 text-[15px] font-semibold text-black shadow-sm outline-none transition-colors hover:bg-azure-deep focus-visible:ring-2 focus-visible:ring-ink/20"
               >
                 Get a Quote
                 <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">
@@ -73,7 +73,7 @@ export function MobileMenu() {
             </Dialog.Close>
             <a
               href={company.phoneHref}
-              className="flex items-center justify-center gap-2 rounded-xl border border-hairline bg-white px-4 py-3 text-sm font-medium text-ink transition-colors hover:bg-mist-2"
+              className="flex items-center justify-center gap-2 rounded-xl border border-hairline bg-mist-2 px-4 py-3 text-sm font-medium text-ink transition-colors hover:bg-mist-2"
             >
               <Phone className="size-4 text-azure" aria-hidden="true" />
               {company.phoneDisplay}

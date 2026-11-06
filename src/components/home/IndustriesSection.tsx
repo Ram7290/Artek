@@ -31,7 +31,7 @@ const GRADIENTS = [
 export function IndustriesSection() {
   const bySlug = (id: string) => coreServices.find((s) => s.id === id) ?? services.find((s) => s.id === id);
   return (
-    <section className="bg-white py-16 sm:py-24" aria-labelledby="industries-heading">
+    <section className="bg-mist-2 py-16 sm:py-24" aria-labelledby="industries-heading">
       <div className="container-page">
         <SectionHeading
           eyebrow="Industries"
@@ -43,7 +43,7 @@ export function IndustriesSection() {
             const Icon = ICONS[ind.icon as keyof typeof ICONS] ?? Building2;
             return (
               <RevealBox as="li" key={ind.slug} delay={(i % 3) * 80}>
-                <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-hairline bg-white shadow-(--shadow-card) transition-all duration-300 hover:-translate-y-1 hover:border-accent-500/50 hover:shadow-(--shadow-card-hover)">
+                <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-hairline bg-mist-2 shadow-(--shadow-card) transition-all duration-300 hover:-translate-y-1 hover:border-accent-500/50 hover:shadow-(--shadow-card-hover)">
                   {/* placeholder visual — replace with optimized webp/avif project photo of slug `ind.slug` */}
                   <div className={`relative flex h-40 items-center justify-center overflow-hidden bg-gradient-to-br ${GRADIENTS[i % GRADIENTS.length]}`}>
                     {/* soft gold halo — eases in on hover */}

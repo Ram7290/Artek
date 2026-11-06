@@ -13,7 +13,7 @@ export default function Blog() {
     <article>
       <header className="bg-navy-950 pb-14 pt-32 text-white sm:pb-16">
         <div className="container-page">
-          <div className="[&_a]:text-slate-400 [&_span]:text-slate-500">
+          <div className="[&_a]:text-slate-400 [&_span]:text-slate-400">
             <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Blog", to: "/blog" }]} />
           </div>
           <h1 className="mt-6 text-balance text-3xl font-bold tracking-tight sm:text-4xl">ARTEK Blog</h1>
@@ -24,10 +24,10 @@ export default function Blog() {
       </header>
       <section className="bg-slate-safe py-16 sm:py-24">
         <div className="container-page">
-          <RevealBox className="mx-auto max-w-xl rounded-xl border border-slate-200 bg-white p-10 text-center">
+          <RevealBox className="mx-auto max-w-xl rounded-xl border border-white/10 bg-mist-2 p-10 text-center">
             <PenLine className="mx-auto size-8 text-accent-600" aria-hidden="true" />
-            <h2 className="mt-4 text-lg font-semibold text-slate-900">Content is being prepared</h2>
-            <p className="mt-2 text-sm text-slate-600">
+            <h2 className="mt-4 text-lg font-semibold text-ink">Content is being prepared</h2>
+            <p className="mt-2 text-sm text-slate-300">
               We&apos;re writing our first articles covering CCTV best practices, office network
               planning and Microsoft 365 adoption. In the meantime, our{" "}
               <Link to="/solutions" className="text-accent-600 hover:underline">solution pages</Link> and{" "}

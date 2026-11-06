@@ -11,7 +11,7 @@ function MapEmbed({ url, title }: { url: string; title: string }) {
       src={url}
       title={title}
       loading="lazy"
-      className="mt-1 h-80 w-full rounded-xl border border-slate-200"
+      className="mt-1 h-80 w-full rounded-xl border border-white/10"
       referrerPolicy="no-referrer-when-downgrade"
     />
   );
@@ -41,15 +41,15 @@ export default function Contact() {
         <div className="container-page grid gap-10 lg:grid-cols-[1fr_minmax(0,1.3fr)] lg:gap-14">
           {/* contact information */}
           <RevealBox className="space-y-5">
-            <div className="rounded-xl border border-slate-200 bg-white p-6">
-              <h2 className="text-lg font-semibold text-slate-900">Contact information</h2>
+            <div className="rounded-xl border border-white/10 bg-mist-2 p-6">
+              <h2 className="text-lg font-semibold text-ink">Contact information</h2>
               <ul className="mt-5 space-y-4 text-sm">
                 <li className="flex items-center gap-3">
                   <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-accent-600/10">
                     <Phone className="size-4 text-accent-600" aria-hidden="true" />
                   </span>
                   <div>
-                    <p className="font-medium text-slate-900">Phone</p>
+                    <p className="font-medium text-ink">Phone</p>
                     <a href={company.phoneHref} className="text-accent-600 underline-offset-4 hover:underline">
                       {company.phoneDisplay}
                     </a>
@@ -60,13 +60,13 @@ export default function Contact() {
                     <Mail className="size-4 text-accent-600" aria-hidden="true" />
                   </span>
                   <div>
-                    <p className="font-medium text-slate-900">Email</p>
+                    <p className="font-medium text-ink">Email</p>
                     {company.email ? (
                       <a href={`mailto:${company.email}`} className="text-accent-600 underline-offset-4 hover:underline">
                         {company.email}
                       </a>
                     ) : (
-                      <span className="text-slate-500">
+                      <span className="text-slate-400">
                         To be published — call us directly for now.
                       </span>
                     )}
@@ -77,8 +77,8 @@ export default function Contact() {
                     <MapPin className="size-4 text-accent-600" aria-hidden="true" />
                   </span>
                   <div>
-                    <p className="font-medium text-slate-900">Office</p>
-                    <p className="text-slate-600">{company.address ?? "Dubai, United Arab Emirates"}</p>
+                    <p className="font-medium text-ink">Office</p>
+                    <p className="text-slate-300">{company.address ?? "Dubai, United Arab Emirates"}</p>
                   </div>
                 </li>
                 {company.businessHours && (
@@ -87,8 +87,8 @@ export default function Contact() {
                       <Clock className="size-4 text-accent-600" aria-hidden="true" />
                     </span>
                     <div>
-                      <p className="font-medium text-slate-900">Business hours</p>
-                      <p className="text-slate-600">{company.businessHours}</p>
+                      <p className="font-medium text-ink">Business hours</p>
+                      <p className="text-slate-300">{company.businessHours}</p>
                     </div>
                   </li>
                 )}
@@ -96,8 +96,8 @@ export default function Contact() {
             </div>
 
             {company.socials.length > 0 && (
-              <div className="rounded-xl border border-slate-200 bg-white p-6">
-                <h2 className="text-sm font-semibold text-slate-900">Follow us</h2>
+              <div className="rounded-xl border border-white/10 bg-mist-2 p-6">
+                <h2 className="text-sm font-semibold text-ink">Follow us</h2>
                 <ul className="mt-3 flex flex-wrap gap-3">
                   {company.socials.map((s) => (
                     <li key={s.url}>
@@ -116,9 +116,9 @@ export default function Contact() {
           </RevealBox>
 
           {/* quote form */}
-          <RevealBox delay={100} className="rounded-xl border border-slate-200 bg-white p-6 sm:p-8">
-            <h2 className="text-lg font-semibold text-slate-900">Request a free quote</h2>
-            <p className="mt-1 text-sm text-slate-600">
+          <RevealBox delay={100} className="rounded-xl border border-white/10 bg-mist-2 p-6 sm:p-8">
+            <h2 className="text-lg font-semibold text-ink">Request a free quote</h2>
+            <p className="mt-1 text-sm text-slate-300">
               Fill in the form and our team will respond with a tailored proposal.
             </p>
             <ContactForm className="mt-6" />

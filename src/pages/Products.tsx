@@ -26,7 +26,7 @@ export default function Products() {
     <article>
       <header className="bg-navy-950 pb-14 pt-32 text-white sm:pb-16">
         <div className="container-page">
-          <div className="[&_a]:text-slate-400 [&_span]:text-slate-500">
+          <div className="[&_a]:text-slate-400 [&_span]:text-slate-400">
             <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Products", to: "/products" }]} />
           </div>
           <h1 className="mt-6 text-balance text-3xl font-bold tracking-tight sm:text-4xl">IT Products We Supply</h1>
@@ -53,15 +53,15 @@ export default function Products() {
               const Icon = ICONS[cat.icon] ?? Monitor;
               return (
                 <RevealBox as="li" key={cat.slug} delay={(i % 3) * 70}>
-                  <div className="flex h-full flex-col rounded-xl border border-slate-200 bg-white p-6">
+                  <div className="flex h-full flex-col rounded-xl border border-white/10 bg-mist-2 p-6">
                     <span className="flex size-11 items-center justify-center rounded-lg bg-accent-600/10">
                       <Icon className="size-5 text-accent-600" aria-hidden="true" />
                     </span>
-                    <h2 className="mt-4 text-lg font-semibold text-slate-900">{cat.name}</h2>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-600">{cat.description}</p>
+                    <h2 className="mt-4 text-lg font-semibold text-ink">{cat.name}</h2>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-300">{cat.description}</p>
                     <ul className="mt-4 flex-1 space-y-1.5">
                       {cat.items.map((item) => (
-                        <li key={item} className="flex items-center gap-2 text-sm text-slate-700">
+                        <li key={item} className="flex items-center gap-2 text-sm text-slate-300">
                           <span className="size-1.5 rounded-full bg-accent-400" aria-hidden="true" />
                           {item}
                         </li>
@@ -73,9 +73,9 @@ export default function Products() {
             })}
           </ul>
 
-          <div className="mt-12 rounded-xl border border-slate-200 bg-white p-6 text-center sm:p-10">
-            <h2 className="text-xl font-bold text-slate-900">Need a specific model or a bulk order?</h2>
-            <p className="mx-auto mt-2 max-w-xl text-sm text-slate-600">
+          <div className="mt-12 rounded-xl border border-white/10 bg-mist-2 p-6 text-center sm:p-10">
+            <h2 className="text-xl font-bold text-ink">Need a specific model or a bulk order?</h2>
+            <p className="mx-auto mt-2 max-w-xl text-sm text-slate-300">
               Tell us the requirement — a single device or a full office rollout — and we&apos;ll quote
               it properly. Everything we supply can be installed and supported by the same team.
             </p>

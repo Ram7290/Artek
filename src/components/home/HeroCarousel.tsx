@@ -72,7 +72,7 @@ export function HeroCarousel({ slides }: { slides: readonly HeroSlide[] }) {
       role="region"
       aria-roledescription="carousel"
       aria-label="ARTEK technology solutions"
-      className="group relative h-full w-full overflow-hidden rounded-2xl bg-mist-2 shadow-(--shadow-card-hover) ring-1 ring-white/60 ring-inset sm:rounded-3xl"
+      className="group relative h-full w-full overflow-hidden rounded-2xl bg-mist-2 shadow-(--shadow-card-hover) ring-1 ring-white/15 ring-inset sm:rounded-3xl"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -114,7 +114,7 @@ export function HeroCarousel({ slides }: { slides: readonly HeroSlide[] }) {
       {/* readability scrim */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-[62%] bg-gradient-to-t from-ink/85 via-ink/40 to-transparent"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[62%] bg-gradient-to-t from-black/85 via-black/40 to-transparent"
       />
 
       {/* overlay content */}
@@ -173,8 +173,8 @@ export function HeroCarousel({ slides }: { slides: readonly HeroSlide[] }) {
             className={cn(
               "h-1.5 rounded-full transition-all duration-300",
               i === index
-                ? "w-7 bg-white"
-                : "w-3 bg-white/40 hover:bg-white/70",
+                ? "w-7 bg-mist-2"
+                : "w-3 bg-white/5 hover:bg-white/10",
             )}
           />
         ))}

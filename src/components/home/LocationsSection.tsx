@@ -20,15 +20,15 @@ export function LocationsSection() {
             <RevealBox as="li" key={loc.slug} delay={(i % 4) * 70}>
               <Link
                 to={`/locations/${loc.slug}`}
-                className="group flex h-full flex-col rounded-xl border border-slate-200 bg-white p-6 transition-colors hover:border-accent-600/50"
+                className="group flex h-full flex-col rounded-xl border border-white/10 bg-mist-2 p-6 transition-colors hover:border-accent-600/50"
               >
                 <span className="flex size-10 items-center justify-center rounded-lg bg-accent-600/10">
                   <MapPin className="size-5 text-accent-600" aria-hidden="true" />
                 </span>
-                <h3 className="mt-4 text-lg font-semibold text-slate-900 group-hover:text-accent-600">
+                <h3 className="mt-4 text-lg font-semibold text-ink group-hover:text-accent-600">
                   {loc.name}
                 </h3>
-                <p className="mt-1.5 flex-1 text-sm leading-relaxed text-slate-600">
+                <p className="mt-1.5 flex-1 text-sm leading-relaxed text-slate-300">
                   {loc.coverage[0]}
                 </p>
                 <span className="mt-4 text-xs font-medium text-slate-400">

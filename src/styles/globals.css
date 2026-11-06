@@ -4,30 +4,32 @@
 @theme {
   --font-sans: "Manrope Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
-  /* Blue & light-blue palette — saturated blue-tinted lights (not washed-out
-     pale), vivid azure accents, deep blue-navy darks. Sky (accent-400) is
-     reserved for dark backgrounds; azure-deep fills keep white text readable. */
-  --color-mist: #ECF2FA;
-  --color-mist-2: #DDE8F5;
-  --color-ink: #101D35;
-  --color-ink-soft: #2A3C5E;
-  --color-azure: #3478F6;
-  --color-azure-deep: #2563EB;
-  --color-hairline: #CDDAEA;
+  /* Black & white (monochrome) theme — neutral dark surfaces, light grays,
+     pure-white accents. `mist` = page background (near-black), `mist-2` =
+     elevated dark surface, `ink` = primary LIGHT text (semantic flip),
+     `hairline` = translucent gray borders. Accents carry hierarchy through
+     opacity and weight only — no chromatic color. */
+  --color-mist: #0A0A0B;
+  --color-mist-2: #161618;
+  --color-ink: #F5F5F5;
+  --color-ink-soft: #A3A3A3;
+  --color-azure: #FFFFFF;
+  --color-azure-deep: #D4D4D4;
+  --color-hairline: #2A2A2C;
 
-  /* Brand palette — ARTEK design tokens (inner pages) */
-  --color-navy-950: #0A1428;
-  --color-navy-900: #101D35;
-  --color-navy-850: #16213B;
-  --color-navy-700: #1E293B;
-  --color-accent-700: #2563EB;
-  --color-accent-600: #3478F6;
-  --color-accent-500: #3B82F6;
-  --color-accent-400: #38BDF8;
-  --color-slate-safe: #ECF2FA;
+  /* Brand neutral scale — inner pages */
+  --color-navy-950: #050505;
+  --color-navy-900: #0A0A0B;
+  --color-navy-850: #161618;
+  --color-navy-700: #212123;
+  --color-accent-700: #B0B0B0;
+  --color-accent-600: #F0F0F0;
+  --color-accent-500: #E0E0E0;
+  --color-accent-400: #D4D4D4;
+  --color-slate-safe: #0A0A0B;
 
-  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.06), 0 4px 16px rgb(15 23 42 / 0.08);
-  --shadow-card-hover: 0 2px 4px rgb(15 23 42 / 0.08), 0 12px 32px rgb(37 99 235 / 0.16);
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 16px rgb(0 0 0 / 0.35);
+  --shadow-card-hover: 0 2px 4px rgb(0 0 0 / 0.45), 0 14px 36px rgb(0 0 0 / 0.5);
 
   --animate-float: float 7s ease-in-out infinite;
   --animate-float-slow: float 10s ease-in-out infinite;
@@ -136,14 +138,14 @@ video {
 
 /* Focus visibility for keyboard users */
 :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
-  outline: 2px solid #3478F6;
+  outline: 2px solid #F5F5F5;
   outline-offset: 2px;
   border-radius: 4px;
 }
 
 ::selection {
-  background: #38BDF8;
-  color: #101D35;
+  background: #F5F5F5;
+  color: #010057;
 }
 
 .container-page {

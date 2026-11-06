@@ -24,14 +24,14 @@ export function HeroSection() {
           Layers are aria-hidden + pointer-events-none and paint behind the
           content (content wrapper is positioned relative after them). */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        {/* ① top seam */}
-        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white via-white/70 to-transparent" />
-        {/* ② azure bloom — headline zone only */}
+        {/* top seam — softened so it never reads as a white band on the blue field */}
+        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white/10 via-white/5 to-transparent" />
+        {/* azure bloom — headline zone only */}
         <div
           className="absolute left-[-14%] top-[4%] h-[46rem] w-[46rem] rounded-full"
           style={{
             background:
-              "radial-gradient(closest-side, rgba(215,180,76,0.12), rgba(215,180,76,0.04) 55%, rgba(215,180,76,0) 100%)",
+              "radial-gradient(closest-side, rgba(255,255,255,0.07), rgba(255,255,255,0.03) 55%, rgba(255,255,255,0) 100%)",
           }}
         />
         {/* ④ hairline grid, masked toward the edges */}
@@ -51,13 +51,13 @@ export function HeroSection() {
               height="48"
               patternUnits="userSpaceOnUse"
             >
-              <path d="M48 0H0V48" fill="none" stroke="#101D35" strokeOpacity="0.055" strokeWidth="1" />
+              <path d="M48 0H0V48" fill="none" stroke="#FFFFFF" strokeOpacity="0.055" strokeWidth="1" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#hero-fine-grid)" />
         </svg>
         {/* ⑤ bottom handoff into the trust strip */}
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent via-transparent to-white" />
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent via-transparent to-mist-2" />
       </div>
 
       <div className="container-page relative grid items-center gap-10 pt-28 pb-12 sm:pt-32 sm:pb-16 lg:grid-cols-[44fr_56fr] lg:gap-14 lg:pt-24 lg:pb-20 xl:pt-28 xl:pb-24">
@@ -78,7 +78,7 @@ export function HeroSection() {
             <span className="text-azure">Protection.</span>
           </h1>
           <p
-            className="animate-fade-up text-slate-600 mt-5 max-w-xl text-pretty text-base leading-7 sm:text-[17px] sm:leading-8"
+            className="animate-fade-up text-slate-300 mt-5 max-w-xl text-pretty text-base leading-7 sm:text-[17px] sm:leading-8"
             style={{ animationDelay: "140ms" }}
           >
             From intelligent surveillance and biometric systems to access control
@@ -92,7 +92,7 @@ export function HeroSection() {
           >
             <Link
               to="/contact"
-              className="group inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-azure px-7 text-[15px] font-semibold text-white shadow-lg shadow-azure/25 transition-all duration-300 hover:bg-azure-deep hover:shadow-azure/35 focus-visible:outline-2 focus-visible:outline-azure"
+              className="group inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-azure px-7 text-[15px] font-semibold text-black shadow-lg shadow-azure/25 transition-all duration-300 hover:bg-azure-deep hover:shadow-azure/35 focus-visible:outline-2 focus-visible:outline-azure"
             >
               Get a Free Consultation
               <ArrowRight
@@ -102,7 +102,7 @@ export function HeroSection() {
             </Link>
             <a
               href={company.phoneHref}
-              className="text-ink inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-hairline bg-white px-7 text-[15px] font-semibold shadow-sm transition-all duration-300 hover:border-azure/50 hover:text-azure-deep focus-visible:outline-2 focus-visible:outline-azure"
+              className="text-ink inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-hairline bg-mist-2 px-7 text-[15px] font-semibold shadow-sm transition-all duration-300 hover:border-azure/50 hover:text-azure-deep focus-visible:outline-2 focus-visible:outline-azure"
             >
               <Phone className="size-4" aria-hidden="true" />
               Talk to Our Team
@@ -117,8 +117,8 @@ export function HeroSection() {
             {company.heroCredentials.map((c) =>
               c.primary ? (
                 <li key={c.label}>
-                  <span className="inline-flex h-8 items-center gap-2 rounded-full border border-azure/30 bg-white py-0.5 pl-1.5 pr-3.5 shadow-sm shadow-azure/10">
-                    <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-azure text-white">
+                  <span className="inline-flex h-8 items-center gap-2 rounded-full border border-azure/30 bg-mist-2 py-0.5 pl-1.5 pr-3.5 shadow-sm shadow-azure/10">
+                    <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-azure text-black">
                       <ShieldCheck className="size-3" aria-hidden="true" />
                     </span>
                     <span className="text-[12.5px] font-bold text-azure-deep">
@@ -129,7 +129,7 @@ export function HeroSection() {
               ) : (
                 <li
                   key={c.label}
-                  className="text-ink/60 inline-flex h-8 items-center gap-1.5 rounded-full border border-hairline bg-white/70 px-3 text-[12.5px] font-semibold"
+                  className="text-ink/60 inline-flex h-8 items-center gap-1.5 rounded-full border border-hairline bg-white/10 px-3 text-[12.5px] font-semibold"
                 >
                   {c.icon === "badge-check" && (
                     <BadgeCheck className="size-3.5 shrink-0" aria-hidden="true" />

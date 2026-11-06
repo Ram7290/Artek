@@ -23,12 +23,12 @@ const CLAIM_LINKS: Partial<Record<(typeof trustClaims)[number]["id"], string>> =
  */
 export function TrustIndicators() {
   return (
-    <section className="border-b border-slate-100 bg-white" aria-label="Trust indicators">
+    <section className="border-b border-white/5 bg-mist-2" aria-label="Trust indicators">
       <div className="container-page py-10">
-        <h2 className="text-center text-sm font-semibold text-slate-700 sm:text-base">
+        <h2 className="text-center text-sm font-semibold text-slate-300 sm:text-base">
           Trusted by leading businesses across Dubai, Abu Dhabi, and the UAE
         </h2>
-        <ul className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-slate-100 sm:grid-cols-3 lg:grid-cols-5">
+        <ul className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-white/10 sm:grid-cols-3 lg:grid-cols-5">
           {trustClaims.map((claim, i) => {
             const Icon = ICONS[claim.id === "dubai-police" ? "shield" : claim.id === "support" ? "headset" : claim.id === "years" ? "clock" : claim.id === "clients" ? "users" : "badge-check"];
             const to = CLAIM_LINKS[claim.id];
@@ -39,7 +39,7 @@ export function TrustIndicators() {
                   <span className="bg-azure/10 relative mx-auto flex size-9 items-center justify-center rounded-full">
                     <ShieldCheck className="text-azure-deep size-5" aria-hidden="true" />
                     <BadgeCheck
-                      className="absolute -right-1 -bottom-1 size-4 rounded-full bg-white text-azure"
+                      className="absolute -right-1 -bottom-1 size-4 rounded-full bg-mist-2 text-azure"
                       aria-hidden="true"
                     />
                   </span>
@@ -49,7 +49,7 @@ export function TrustIndicators() {
                 <p
                   className={cn(
                     "mt-2 text-sm font-semibold",
-                    emphasized ? "text-azure-deep" : "text-slate-900",
+                    emphasized ? "text-azure-deep" : "text-ink",
                   )}
                 >
                   {claim.label}
@@ -61,14 +61,14 @@ export function TrustIndicators() {
                   <p className="text-azure-deep/70 mt-0.5 text-[11px] font-semibold">See what SIRA approval means →</p>
                 )}
                 {!emphasized && (
-                  <p className="mt-0.5 text-xs leading-snug text-slate-500">{claim.detail}</p>
+                  <p className="mt-0.5 text-xs leading-snug text-slate-400">{claim.detail}</p>
                 )}
               </>
             );
             return (
               <li
                 key={claim.id}
-                className={cn("relative bg-white p-5 text-center", i === 0 && "col-span-2 sm:col-span-1")}
+                className={cn("relative bg-mist-2 p-5 text-center", i === 0 && "col-span-2 sm:col-span-1")}
               >
                 {to ? (
                   <Link

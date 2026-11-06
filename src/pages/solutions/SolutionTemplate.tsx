@@ -38,7 +38,7 @@ export default function SolutionTemplate() {
       {/* page header */}
       <header className="bg-navy-950 pb-14 pt-32 text-white sm:pb-16">
         <div className="container-page">
-          <div className="[&_a]:text-slate-400 [&_span]:text-slate-500">
+          <div className="[&_a]:text-slate-400 [&_span]:text-slate-400">
             <Breadcrumbs
               items={[
                 { label: "Home", to: "/" },
@@ -72,13 +72,13 @@ export default function SolutionTemplate() {
       </header>
 
       {/* body */}
-      <div className="bg-white py-14 sm:py-20">
+      <div className="bg-mist-2 py-14 sm:py-20">
         <div className="container-page grid gap-12 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)]">
           <div className="max-w-3xl space-y-12">
             <RevealBox>
-              <h2 className="text-2xl font-bold text-slate-900">Service overview</h2>
-              <p className="mt-4 leading-relaxed text-slate-600">{service.overview}</p>
-              <figure className="mt-8 overflow-hidden rounded-xl border border-slate-200">
+              <h2 className="text-2xl font-bold text-ink">Service overview</h2>
+              <p className="mt-4 leading-relaxed text-slate-300">{service.overview}</p>
+              <figure className="mt-8 overflow-hidden rounded-xl border border-white/10">
                 <img
                   src={service.image}
                   alt={service.imageAlt}
@@ -92,10 +92,10 @@ export default function SolutionTemplate() {
             </RevealBox>
 
             <RevealBox>
-              <h2 className="text-2xl font-bold text-slate-900">What you get</h2>
+              <h2 className="text-2xl font-bold text-ink">What you get</h2>
               <ul className="mt-5 grid gap-3 sm:grid-cols-2">
                 {service.benefits.map((b) => (
-                  <li key={b} className="flex items-start gap-2.5 text-sm text-slate-700">
+                  <li key={b} className="flex items-start gap-2.5 text-sm text-slate-300">
                     <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-accent-600" aria-hidden="true" />
                     {b}
                   </li>
@@ -104,19 +104,19 @@ export default function SolutionTemplate() {
             </RevealBox>
 
             <RevealBox>
-              <h2 className="text-2xl font-bold text-slate-900">Service features</h2>
+              <h2 className="text-2xl font-bold text-ink">Service features</h2>
               <div className="mt-6 grid gap-5 sm:grid-cols-2">
                 {service.features.map((f) => (
-                  <div key={f.title} className="rounded-xl border border-slate-200 bg-slate-50 p-5">
-                    <h3 className="font-semibold text-slate-900">{f.title}</h3>
-                    <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{f.description}</p>
+                  <div key={f.title} className="rounded-xl border border-white/10 bg-white/5 p-5">
+                    <h3 className="font-semibold text-ink">{f.title}</h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-slate-300">{f.description}</p>
                   </div>
                 ))}
               </div>
             </RevealBox>
 
             <RevealBox>
-              <h2 className="text-2xl font-bold text-slate-900">Frequently asked questions</h2>
+              <h2 className="text-2xl font-bold text-ink">Frequently asked questions</h2>
               <FAQAccordion faqs={service.faqs} className="mt-6" />
             </RevealBox>
           </div>
@@ -140,14 +140,14 @@ export default function SolutionTemplate() {
               </a>
             </div>
 
-            <nav aria-label="Related solutions" className="rounded-xl border border-slate-200 p-6">
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">Related solutions</h2>
+            <nav aria-label="Related solutions" className="rounded-xl border border-white/10 p-6">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400">Related solutions</h2>
               <ul className="mt-3 space-y-2.5 text-sm">
                 {related.map((r) => (
                   <li key={r.id}>
                     <Link
                       to={`/solutions/${r.slug}`}
-                      className="font-medium text-slate-800 underline-offset-4 transition-colors hover:text-accent-600 hover:underline"
+                      className="font-medium text-slate-200 underline-offset-4 transition-colors hover:text-accent-600 hover:underline"
                     >
                       {r.title}
                     </Link>

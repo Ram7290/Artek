@@ -32,7 +32,7 @@ export function LocationServiceTemplate() {
     <article>
       <header className="bg-navy-950 pb-14 pt-32 text-white sm:pb-16">
         <div className="container-page">
-          <div className="[&_a]:text-slate-400 [&_span]:text-slate-500">
+          <div className="[&_a]:text-slate-400 [&_span]:text-slate-400">
             <Breadcrumbs
               items={[
                 { label: "Home", to: "/" },
@@ -64,15 +64,15 @@ export function LocationServiceTemplate() {
         </div>
       </header>
 
-      <div className="bg-white py-14 sm:py-20">
+      <div className="bg-mist-2 py-14 sm:py-20">
         <div className="container-page max-w-3xl space-y-8">
           <RevealBox>
-            <h2 className="text-2xl font-bold text-slate-900">About {svc.name} in {location.name}</h2>
-            <p className="mt-4 leading-relaxed text-slate-600">{svc.overview}</p>
+            <h2 className="text-2xl font-bold text-ink">About {svc.name} in {location.name}</h2>
+            <p className="mt-4 leading-relaxed text-slate-300">{svc.overview}</p>
           </RevealBox>
           <RevealBox>
-            <h2 className="text-2xl font-bold text-slate-900">How we deliver this in {location.name}</h2>
-            <ul className="mt-4 space-y-2.5 text-slate-700">
+            <h2 className="text-2xl font-bold text-ink">How we deliver this in {location.name}</h2>
+            <ul className="mt-4 space-y-2.5 text-slate-300">
               {svc.benefits.map((b) => (
                 <li key={b} className="flex items-start gap-2.5 text-sm">
                   <CheckIcon />
@@ -82,8 +82,8 @@ export function LocationServiceTemplate() {
             </ul>
           </RevealBox>
           <RevealBox className="rounded-xl bg-slate-safe p-6">
-            <h2 className="text-lg font-semibold text-slate-900">Request a quote in {location.name}</h2>
-            <p className="mt-2 text-sm text-slate-600">
+            <h2 className="text-lg font-semibold text-ink">Request a quote in {location.name}</h2>
+            <p className="mt-2 text-sm text-slate-300">
               Call {company.phoneDisplay} — a Dubai-based team handles {location.name} scheduling and delivery.
             </p>
             <div className="mt-4 flex flex-col gap-3 sm:flex-row">

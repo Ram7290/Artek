@@ -6,7 +6,7 @@ import { coreServices } from "@/data/services";
 /** Homepage Section 3 — the eight core solution cards (data-driven). */
 export function SolutionsSection() {
   return (
-    <section className=" py-16 sm:py-24" aria-labelledby="solutions-heading">
+    <section className="bg-mist-2 py-16 sm:py-24" aria-labelledby="solutions-heading">
       <div className="container-page">
         <SectionHeading
           eyebrow="What we do"

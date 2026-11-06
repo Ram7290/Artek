@@ -19,8 +19,8 @@ export function FAQAccordion({
       type="single"
       collapsible
       className={cn(
-        "divide-y overflow-hidden rounded-xl border divide-slate-200",
-        dark ? "border-white/10 divide-white/10" : "border-slate-200 divide-slate-200",
+        "divide-y overflow-hidden rounded-xl border divide-white/10",
+        dark ? "border-white/10 divide-white/10" : "border-white/10 divide-white/10",
         className,
       )}
     >
@@ -31,8 +31,8 @@ export function FAQAccordion({
               className={cn(
                 "group flex flex-1 items-center justify-between gap-4 px-5 py-4 text-left text-[15px] font-medium outline-none transition-colors sm:px-6",
                 dark
-                  ? "text-white hover:bg-white/5"
-                  : "text-slate-900 hover:bg-slate-50",
+                  ? "text-white hover:bg-white/10"
+                  : "text-ink hover:bg-white/10",
               )}
             >
               {faq.question}
@@ -49,7 +49,7 @@ export function FAQAccordion({
             <p
               className={cn(
                 "px-5 pb-5 text-sm leading-relaxed sm:px-6",
-                dark ? "text-slate-300" : "text-slate-600",
+                dark ? "text-slate-300" : "text-slate-300",
               )}
             >
               {faq.answer}
