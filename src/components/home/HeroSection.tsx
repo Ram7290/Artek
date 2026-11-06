@@ -5,10 +5,11 @@ import { heroSlides } from "@/data/heroSlides";
 import { company } from "@/data/company";
 
 /**
- * Homepage hero — premium light two-column composition.
- * Left: eyebrow, headline, copy, CTAs, service line.
- * Right: cinematic five-slide carousel (HeroCarousel).
- * Content columns stay stationary; only the carousel rotates.
+ * Homepage hero — fully responsive (320px → 2xl).
+ * Mobile/tablet: single column (text first, carousel below).
+ * Desktop (lg+): two columns 44/56.
+ * Typography uses fluid clamp() sizes so letters scale smoothly
+ * on every screen width, not only at breakpoints.
  */
 export function HeroSection() {
   return (
@@ -16,27 +17,19 @@ export function HeroSection() {
       className="relative overflow-hidden bg-mist"
       aria-labelledby="hero-heading"
     >
-      {/* ── Background composition (decorative, zero-CLS, no animation) ─────────
-          ① top seam          white→mist band behind the fixed navbar
-          ② azure bloom       single soft radial behind eyebrow/H1 zone
-          ④ hairline grid     engineering pattern, masked to fade at edges
-          ⑤ bottom handoff    mist→white merge into the trust strip
-          Layers are aria-hidden + pointer-events-none and paint behind the
-          content (content wrapper is positioned relative after them). */}
+      {/* Background composition (decorative) */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        {/* top seam — softened so it never reads as a white band on the blue field */}
-        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white/10 via-white/5 to-transparent" />
-        {/* azure bloom — headline zone only */}
+        <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white/10 via-white/5 to-transparent sm:h-32" />
+        {/* bloom scales with viewport instead of fixed 46rem */}
         <div
-          className="absolute left-[-14%] top-[4%] h-[46rem] w-[46rem] rounded-full"
+          className="absolute left-[-30%] top-[2%] aspect-square w-[90vw] max-w-[46rem] rounded-full sm:left-[-20%] lg:left-[-14%] lg:top-[4%] lg:w-[46rem]"
           style={{
             background:
               "radial-gradient(closest-side, rgba(255,255,255,0.07), rgba(255,255,255,0.03) 55%, rgba(255,255,255,0) 100%)",
           }}
         />
-        {/* ④ hairline grid, masked toward the edges */}
         <svg
-          className="absolute inset-0 h-full w-full opacity-100"
+          className="absolute inset-0 h-full w-full"
           style={{
             maskImage:
               "radial-gradient(ellipse 92% 82% at 50% 42%, black 26%, transparent 78%)",
@@ -56,72 +49,80 @@ export function HeroSection() {
           </defs>
           <rect width="100%" height="100%" fill="url(#hero-fine-grid)" />
         </svg>
-        {/* ⑤ bottom handoff into the trust strip */}
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent via-transparent to-mist-2" />
+        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent via-transparent to-mist-2 sm:h-24" />
       </div>
 
-      <div className="container-page relative grid items-center gap-10 pt-28 pb-12 sm:pt-32 sm:pb-16 lg:grid-cols-[44fr_56fr] lg:gap-14 lg:pt-24 lg:pb-20 xl:pt-28 xl:pb-24">
+      <div className="container-page relative grid items-center gap-8 px-4 pt-24 pb-10 sm:gap-10 sm:px-6 sm:pt-28 sm:pb-14 md:pt-32 md:pb-16 lg:grid-cols-[44fr_56fr] lg:gap-12 lg:px-8 lg:pt-24 lg:pb-20 xl:gap-14 xl:pt-28 xl:pb-24">
         {/* LEFT — content */}
-        <div className="order-1">
-          <p className="animate-fade-up inline-flex flex-wrap items-center gap-2 text-[10.5px] font-bold uppercase tracking-[0.14em] text-azure">
+        <div className="order-1 min-w-0 text-center lg:text-left">
+          <p className="animate-fade-up inline-flex flex-wrap items-center justify-center gap-2 text-[clamp(0.625rem,0.58rem+0.2vw,0.72rem)] font-bold uppercase tracking-[0.12em] text-azure sm:tracking-[0.14em] lg:justify-start">
             <ShieldCheck className="size-3.5 shrink-0" aria-hidden="true" />
             {company.heroEyebrow}
           </p>
+
           <h1
             id="hero-heading"
-            className="animate-fade-up text-ink mt-5 text-4xl font-extrabold leading-[1.08] tracking-tight text-balance sm:text-5xl xl:text-[3.4rem]"
-            style={{ animationDelay: "70ms" }}
+            className="animate-fade-up text-ink mt-4 text-balance font-extrabold leading-[1.1] tracking-tight sm:mt-5"
+            style={{
+              animationDelay: "70ms",
+              fontSize: "clamp(2rem, 1.3rem + 3.2vw, 3.6rem)",
+            }}
           >
             One Partner.
             <br />
-            Complete{" "}
-            <span className="text-azure">Protection.</span>
+            Complete <span className="text-azure">Protection.</span>
           </h1>
+
           <p
-            className="animate-fade-up text-slate-300 mt-5 max-w-xl text-pretty text-base leading-7 sm:text-[17px] sm:leading-8"
-            style={{ animationDelay: "140ms" }}
+            className="animate-fade-up text-slate-300 mx-auto mt-4 max-w-xl text-pretty leading-relaxed sm:mt-5 lg:mx-0"
+            style={{
+              animationDelay: "140ms",
+              fontSize: "clamp(0.9375rem, 0.88rem + 0.3vw, 1.0625rem)",
+              lineHeight: 1.75,
+            }}
           >
             From intelligent surveillance and biometric systems to access control
             and networking, we deliver smarter technology solutions for homes and
             businesses across the UAE.
           </p>
 
+          {/* CTAs: stacked full-width on phones, inline from sm */}
           <div
-            className="animate-fade-up mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
+            className="animate-fade-up mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center lg:justify-start"
             style={{ animationDelay: "210ms" }}
           >
             <Link
               to="/contact"
-              className="group inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-azure px-7 text-[15px] font-semibold text-black shadow-lg shadow-azure/25 transition-all duration-300 hover:bg-azure-deep hover:shadow-azure/35 focus-visible:outline-2 focus-visible:outline-azure"
+              className="group inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-azure px-5 text-sm font-semibold text-black shadow-lg shadow-azure/25 transition-all duration-300 hover:bg-azure-deep hover:shadow-azure/35 focus-visible:outline-2 focus-visible:outline-azure sm:h-12 sm:w-auto sm:px-7 sm:text-[15px]"
             >
               Get a Free Consultation
               <ArrowRight
-                className="size-4 transition-transform duration-300 group-hover:translate-x-0.5"
+                className="size-4 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5"
                 aria-hidden="true"
               />
             </Link>
             <a
               href={company.phoneHref}
-              className="text-ink inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-hairline bg-mist-2 px-7 text-[15px] font-semibold shadow-sm transition-all duration-300 hover:border-azure/50 hover:text-azure-deep focus-visible:outline-2 focus-visible:outline-azure"
+              className="text-ink inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg border border-hairline bg-mist-2 px-5 text-sm font-semibold shadow-sm transition-all duration-300 hover:border-azure/50 hover:text-azure-deep focus-visible:outline-2 focus-visible:outline-azure sm:h-12 sm:w-auto sm:px-7 sm:text-[15px]"
             >
-              <Phone className="size-4" aria-hidden="true" />
+              <Phone className="size-4 shrink-0" aria-hidden="true" />
               Talk to Our Team
             </a>
           </div>
 
-          {/* credibility chip row — SIRA leads as the primary credential */}
+          {/* credibility chips */}
           <ul
-            className="animate-fade-up mt-8 flex flex-wrap items-center gap-2"
+            className="animate-fade-up mt-7 flex flex-wrap items-center justify-center gap-2 sm:mt-8 lg:justify-start"
             style={{ animationDelay: "270ms" }}
           >
             {company.heroCredentials.map((c) =>
               c.primary ? (
                 <li key={c.label}>
-                  <span className="inline-flex h-8 items-center gap-2 rounded-full border border-azure/30 bg-mist-2 py-0.5 pl-1.5 pr-3.5 shadow-sm shadow-azure/10">
+                  <span className="inline-flex min-h-8 items-center gap-2 rounded-full border border-azure/30 bg-mist-2 py-0.5 pl-1.5 pr-3 shadow-sm shadow-azure/10 sm:pr-3.5">
                     <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-azure text-black">
                       <ShieldCheck className="size-3" aria-hidden="true" />
                     </span>
-                    <span className="text-[12.5px] font-bold text-azure-deep">
+                    <span className="text-xs font-bold text-azure-deep sm:text-[12.5px]">
                       {c.label}
                     </span>
                   </span>
@@ -129,7 +130,7 @@ export function HeroSection() {
               ) : (
                 <li
                   key={c.label}
-                  className="text-ink/60 inline-flex h-8 items-center gap-1.5 rounded-full border border-hairline bg-white/10 px-3 text-[12.5px] font-semibold"
+                  className="text-ink/60 inline-flex min-h-8 items-center gap-1.5 rounded-full border border-hairline bg-white/10 px-2.5 text-xs font-semibold sm:px-3 sm:text-[12.5px]"
                 >
                   {c.icon === "badge-check" && (
                     <BadgeCheck className="size-3.5 shrink-0" aria-hidden="true" />
@@ -145,7 +146,7 @@ export function HeroSection() {
           </ul>
 
           <p
-            className="animate-fade-up text-ink/60 mt-4 text-[11px] font-semibold uppercase tracking-[0.22em]"
+            className="animate-fade-up text-ink/60 mt-4 text-[10px] font-semibold uppercase tracking-[0.14em] sm:text-[11px] sm:tracking-[0.22em]"
             style={{ animationDelay: "330ms" }}
           >
             CCTV <span aria-hidden="true">·</span> Biometrics{" "}
@@ -154,9 +155,9 @@ export function HeroSection() {
           </p>
         </div>
 
-        {/* RIGHT — cinematic carousel */}
-        <div className="animate-fade-in order-2 w-full">
-          <div className="aspect-[4/3] w-full lg:aspect-[4/3.1]">
+        {/* RIGHT — carousel */}
+        <div className="animate-fade-in order-2 mx-auto w-full min-w-0 max-w-2xl lg:mx-0 lg:max-w-none">
+          <div className="aspect-[4/3] w-full sm:aspect-[16/11] lg:aspect-[4/3.1]">
             <HeroCarousel slides={heroSlides} />
           </div>
         </div>
