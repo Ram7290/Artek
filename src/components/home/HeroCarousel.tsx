@@ -72,7 +72,7 @@ export function HeroCarousel({ slides }: { slides: readonly HeroSlide[] }) {
       role="region"
       aria-roledescription="carousel"
       aria-label="ARTEK technology solutions"
-      className="group relative h-full w-full overflow-hidden rounded-2xl bg-mist-2 shadow-(--shadow-card-hover) sm:rounded-3xl"
+      className="group relative h-full w-full overflow-hidden rounded-2xl bg-mist-2 shadow-(--shadow-card-hover) ring-1 ring-white/60 ring-inset sm:rounded-3xl"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}

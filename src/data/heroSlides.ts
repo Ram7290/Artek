@@ -18,7 +18,7 @@ export const heroSlides: readonly HeroSlide[] = [
     description: "Advanced surveillance solutions for homes and businesses.",
     image: "/images/hero/slide1-cctv.webp",
     imageAlt:
-      "Professional CCTV surveillance camera installed on a modern building",
+      "Professional vandal dome security camera installed on a building exterior",
     width: 1600,
     height: 1200,
   },

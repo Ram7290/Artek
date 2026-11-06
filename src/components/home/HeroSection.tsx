@@ -16,7 +16,51 @@ export function HeroSection() {
       className="relative overflow-hidden bg-mist"
       aria-labelledby="hero-heading"
     >
-      <div className="container-page grid items-center gap-10 pt-28 pb-12 sm:pt-32 sm:pb-16 lg:grid-cols-[44fr_56fr] lg:gap-14 lg:pt-24 lg:pb-20 xl:pt-28 xl:pb-24">
+      {/* ── Background composition (decorative, zero-CLS, no animation) ─────────
+          ① top seam          white→mist band behind the fixed navbar
+          ② azure bloom       single soft radial behind eyebrow/H1 zone
+          ④ hairline grid     engineering pattern, masked to fade at edges
+          ⑤ bottom handoff    mist→white merge into the trust strip
+          Layers are aria-hidden + pointer-events-none and paint behind the
+          content (content wrapper is positioned relative after them). */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        {/* ① top seam */}
+        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white via-white/70 to-transparent" />
+        {/* ② azure bloom — headline zone only */}
+        <div
+          className="absolute left-[-14%] top-[4%] h-[46rem] w-[46rem] rounded-full"
+          style={{
+            background:
+              "radial-gradient(closest-side, rgba(52,120,246,0.10), rgba(52,120,246,0.03) 55%, rgba(52,120,246,0) 100%)",
+          }}
+        />
+        {/* ④ hairline grid, masked toward the edges */}
+        <svg
+          className="absolute inset-0 h-full w-full opacity-100"
+          style={{
+            maskImage:
+              "radial-gradient(ellipse 92% 82% at 50% 42%, black 26%, transparent 78%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 92% 82% at 50% 42%, black 26%, transparent 78%)",
+          }}
+        >
+          <defs>
+            <pattern
+              id="hero-fine-grid"
+              width="48"
+              height="48"
+              patternUnits="userSpaceOnUse"
+            >
+              <path d="M48 0H0V48" fill="none" stroke="#101D35" strokeOpacity="0.055" strokeWidth="1" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#hero-fine-grid)" />
+        </svg>
+        {/* ⑤ bottom handoff into the trust strip */}
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent via-transparent to-white" />
+      </div>
+
+      <div className="container-page relative grid items-center gap-10 pt-28 pb-12 sm:pt-32 sm:pb-16 lg:grid-cols-[44fr_56fr] lg:gap-14 lg:pt-24 lg:pb-20 xl:pt-28 xl:pb-24">
         {/* LEFT — content */}
         <div className="order-1">
           <p className="animate-fade-up inline-flex flex-wrap items-center gap-2 text-[10.5px] font-bold uppercase tracking-[0.14em] text-azure">
