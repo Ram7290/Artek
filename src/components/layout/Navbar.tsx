@@ -10,9 +10,9 @@ import { cn } from "@/lib/utils";
  * Premium floating navigation:
  * - White card (border + soft shadow) inside the centred 1400px container,
  *   detached from the viewport edge.
- * - On scroll the surface stays white; only the shadow/border lift subtly —
- *   no size changes, no layout jumps.
- * - Whole site is light-themed navigation (matches the ARTEK light navbar spec).
+ * - On scroll the surface stays a dark glass; only the opacity/shadow lift
+ *   subtly — no size changes, no layout jumps.
+ * - Whole site uses dark-themed navigation (matches the monochrome spec).
  */
 export function Navbar() {
   const scrolled = useScrolled(24);
@@ -33,8 +33,8 @@ export function Navbar() {
             className={cn(
               "flex h-16 items-center justify-between gap-4 rounded-2xl border px-4 transition-all duration-300 sm:px-6",
               scrolled
-                ? "border-hairline bg-white/10 shadow-lg shadow-ink/[0.08] backdrop-blur-xl"
-                : "border-white/70 bg-white/10 shadow-sm backdrop-blur-xl",
+                ? "border-hairline bg-navy-950/80 shadow-lg shadow-black/40 backdrop-blur-xl"
+                : "border-hairline/70 bg-navy-950/40 shadow-sm backdrop-blur-xl",
             )}
           >
             <Logo dark />
