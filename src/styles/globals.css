@@ -33,6 +33,7 @@
   --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-fade-in: fade-in 0.8s ease both;
   --animate-marquee: marquee 38s linear infinite;
+  --animate-aurora: aurora 80s ease-in-out infinite;
 }
 
 @keyframes float {
@@ -98,6 +99,17 @@
   }
   to {
     height: 0;
+  }
+}
+
+/* Slow ambient drift for the hero aurora layer (composited transform only) */
+@keyframes aurora {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(4rem, 2.5rem, 0) scale(1.07);
   }
 }
 

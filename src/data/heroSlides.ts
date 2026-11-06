@@ -16,10 +16,10 @@ export const heroSlides: readonly HeroSlide[] = [
     category: "Video Surveillance",
     title: "Intelligent CCTV Solutions",
     description: "Advanced surveillance solutions for homes and businesses.",
-    image: "/images/hero/slide1-cctv.webp",
+    image: "/images/hero/artek-security-workspace.webp",
     imageAlt:
-      "Professional vandal dome security camera installed on a building exterior",
-    width: 1600,
+      "ARTEK security solutions workspace — CCTV monitoring and IT setup",
+    width: 1536,
     height: 1200,
   },
   {
