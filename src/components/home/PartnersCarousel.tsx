@@ -14,7 +14,7 @@ import { partners } from "@/data/industries";
 export function PartnersCarousel() {
   const track = [...partners, ...partners];
   return (
-    <section className="overflow-hidden bg-white py-14" aria-label="Technology partners">
+    <section className="overflow-hidden bg-slate-safe py-14" aria-label="Technology partners">
       <div className="container-page">
         <h2 className="text-center text-2xl font-bold text-slate-900 sm:text-3xl">Trusted Technology Partners</h2>
         <p className="mt-3 text-center text-sm text-slate-600 sm:text-base">
