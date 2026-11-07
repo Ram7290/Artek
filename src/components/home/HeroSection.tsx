@@ -118,11 +118,11 @@ export function HeroSection() {
             {company.heroCredentials.map((c) =>
               c.primary ? (
                 <li key={c.label}>
-                  <span className="inline-flex min-h-8 items-center gap-2 rounded-full border border-azure/30 bg-mist-2 py-0.5 pl-1.5 pr-3 shadow-sm shadow-azure/10 sm:pr-3.5">
-                    <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-azure text-black">
-                      <ShieldCheck className="size-3" aria-hidden="true" />
+                  <span className="inline-flex min-h-6 items-center gap-1.5 rounded-full border border-azure/30 bg-mist-2 py-0.5 pl-1 pr-2.5 shadow-sm shadow-azure/10">
+                    <span className="flex size-4 shrink-0 items-center justify-center rounded-full bg-azure text-black">
+                      <ShieldCheck className="size-2.5" aria-hidden="true" />
                     </span>
-                    <span className="text-xs font-bold text-azure-deep sm:text-[12.5px]">
+                    <span className="text-[11px] font-bold text-azure-deep">
                       {c.label}
                     </span>
                   </span>
@@ -130,14 +130,14 @@ export function HeroSection() {
               ) : (
                 <li
                   key={c.label}
-                  className="text-ink/60 inline-flex min-h-8 items-center gap-1.5 rounded-full border border-hairline bg-white/10 px-2.5 text-xs font-semibold sm:px-3 sm:text-[12.5px]"
+                  className="text-ink/60 inline-flex min-h-6 items-center gap-1 rounded-full border border-hairline bg-white/10 px-2 text-[11px] font-semibold"
                 >
                   {c.icon === "badge-check" && (
-                    <BadgeCheck className="size-3.5 shrink-0" aria-hidden="true" />
+                    <BadgeCheck className="size-3 shrink-0" aria-hidden="true" />
                   )}
-                  {c.icon === "users" && <Users className="size-3.5 shrink-0" aria-hidden="true" />}
+                  {c.icon === "users" && <Users className="size-3 shrink-0" aria-hidden="true" />}
                   {c.icon === "map-pin" && (
-                    <MapPin className="size-3.5 shrink-0" aria-hidden="true" />
+                    <MapPin className="size-3 shrink-0" aria-hidden="true" />
                   )}
                   {c.label}
                 </li>

@@ -59,7 +59,7 @@ export const company: CompanyDetails = {
   heroEyebrow: "SIRA Approved CCTV & IT Services Company in Dubai",
   heroCredentials: [
     { label: "SIRA Certified", icon: "shield-check", primary: true },
-    { label: "Dubai Police Approved", icon: "badge-check" },
+    // { label: "Dubai Police Approved", icon: "badge-check" },
     { label: "2500+ UAE Businesses", icon: "users" },
     { label: "Computer Street, Bur Dubai", icon: "map-pin" },
   ],
@@ -101,12 +101,12 @@ export const trustClaims: readonly TrustClaimEntry[] = [
     detail: "CCTV installations follow SIRA requirements.",
     status: "pending-verification",
   },
-  {
-    id: "dubai-police",
-    label: "Dubai Police Approved",
-    detail: "Working within Dubai Police security standards.",
-    status: "pending-verification",
-  },
+  // {
+  //   id: "dubai-police",
+  //   label: "Dubai Police Approved",
+  //   detail: "Working within Dubai Police security standards.",
+  //   status: "pending-verification",
+  // },
   {
     id: "years",
     label: "15+ Years Experience",
