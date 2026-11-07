@@ -28,7 +28,7 @@ export function TrustIndicators() {
         <h2 className="text-center text-sm font-semibold text-slate-300 sm:text-base">
           Trusted by leading businesses across Dubai, Abu Dhabi, and the UAE
         </h2>
-        <ul className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-white/10 sm:grid-cols-3 lg:grid-cols-4">
+        <ul className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-white/10 md:grid-cols-3 lg:grid-cols-4">
           {trustClaims.map((claim, i) => {
             const Icon = ICONS[claim.id === "dubai-police" ? "shield" : claim.id === "support" ? "headset" : claim.id === "years" ? "clock" : claim.id === "clients" ? "users" : "badge-check"];
             const to = CLAIM_LINKS[claim.id];
