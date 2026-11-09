@@ -25,7 +25,7 @@ export default function Solutions() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {coreServices.map((s, i) => (
               <RevealBox key={s.slug} delay={(i % 4) * 70}>
-                <ServiceCard service={s} priority={i < 2} />
+                <ServiceCard service={s} index={i} />
               </RevealBox>
             ))}
           </div>

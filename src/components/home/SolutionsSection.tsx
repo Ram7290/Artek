@@ -16,7 +16,7 @@ export function SolutionsSection() {
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {coreServices.map((service, i) => (
             <RevealBox key={service.slug} delay={(i % 4) * 70}>
-              <ServiceCard service={service} priority={i < 2} />
+              <ServiceCard service={service} index={i} />
             </RevealBox>
           ))}
         </div>
