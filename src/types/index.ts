@@ -42,6 +42,18 @@ export interface Faq {
   answer: string;
 }
 
+/** Client testimonial (see src/data/testimonials.ts) */
+export interface Testimonial {
+  /** stable key */
+  id: string;
+  quote: string;
+  name: string;
+  role: string;
+  company: string;
+  /** 1–5, rendered as stars */
+  rating: 1 | 2 | 3 | 4 | 5;
+}
+
 /** Verification status for company claims — see README "Claims to verify" */
 export type ClaimStatus = "confirmed-provided-by-client" | "pending-verification";
 

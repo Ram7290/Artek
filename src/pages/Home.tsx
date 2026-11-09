@@ -4,6 +4,7 @@ import { SolutionsSection } from "@/components/home/SolutionsSection";
 import { PartnersCarousel } from "@/components/home/PartnersCarousel";
 import { WhyChooseArtek } from "@/components/home/WhyChooseArtek";
 import { IndustriesSection } from "@/components/home/IndustriesSection";
+import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 // import { LocationsSection } from "@/components/home/LocationsSection";
 import { FAQSection } from "@/components/home/FAQSection";
 // import { FinalCTA } from "@/components/home/FinalCTA";
@@ -18,6 +19,7 @@ export default function Home() {
       <SolutionsSection />
       <PartnersCarousel />
       <IndustriesSection />
+      <TestimonialsSection />
       {/* <LocationsSection /> */}
       <FAQSection />
       {/* <FinalCTA /> */}
