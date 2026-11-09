@@ -81,9 +81,7 @@ export function HeroSection() {
               lineHeight: 1.75,
             }}
           >
-            From intelligent surveillance and biometric systems to access control
-            and networking, we deliver smarter technology solutions for homes and
-            businesses across the UAE.
+            Smarter security and integrated technology solutions for homes and businesses across the UAE.
           </p>
 
           {/* CTAs: stacked full-width on phones, inline from sm */}
