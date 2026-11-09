@@ -26,7 +26,7 @@ export function TestimonialsSection() {
 
   return (
     <section
-      className="border-y border-white/5 bg-mist-2 py-16 sm:py-24"
+      className="border-y border-white/5 bg-slate-safe py-16 sm:py-24"
       aria-labelledby="testimonials-heading"
     >
       <div className="container-page">
