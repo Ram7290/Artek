@@ -5,7 +5,7 @@ import { homeFaqs } from "@/data/faqs";
 /** Homepage Section 8 — SEO-friendly accessible FAQ. */
 export function FAQSection() {
   return (
-    <section className="bg-mist-2 py-16 sm:py-24" aria-labelledby="faq-heading">
+    <section className="bg-slate-safe py-16 sm:py-24" aria-labelledby="faq-heading">
       <div className="container-page">
         <SectionHeading
           eyebrow="FAQ"
