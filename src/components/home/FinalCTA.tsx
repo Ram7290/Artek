@@ -8,7 +8,7 @@ export function FinalCTA() {
   return (
     <section className="relative overflow-hidden bg-navy-950 py-16 text-white sm:py-24" aria-labelledby="cta-heading">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-0 h-72 w-[42rem] -translate-x-1/2 rounded-full bg-accent-600/25 blur-[110px]" />
+        <div className="absolute left-1/2 top-0 h-72 w-[42rem] -translate-x-1/2 rounded-full bg-white/10 blur-[110px]" />
       </div>
       <RevealBox className="container-page relative text-center">
         <h2 id="cta-heading" className="text-balance text-3xl font-bold tracking-tight sm:text-4xl">
@@ -20,7 +20,7 @@ export function FinalCTA() {
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <Link
             to="/contact"
-            className="group inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-accent-600 px-7 text-base font-semibold text-white transition-colors hover:bg-accent-700"
+            className="group inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-white px-7 text-base font-semibold text-black transition-colors hover:bg-white/85"
           >
             Request a Free Quote
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />

@@ -20,7 +20,7 @@ export default function NotFound() {
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <Link
             to="/"
-            className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-accent-600 px-6 font-semibold text-white transition-colors hover:bg-accent-700"
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-white px-6 font-semibold text-black transition-colors hover:bg-white/85"
           >
             <Home className="size-4" aria-hidden="true" />
             Back to homepage

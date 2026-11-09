@@ -98,7 +98,7 @@ export default function About() {
                   "Support — handover, documentation and optional AMC.",
                 ].map((step, i) => (
                   <li key={step} className="flex gap-4">
-                    <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-accent-600 text-sm font-bold text-white">
+                    <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white text-sm font-bold text-black">
                       {i + 1}
                     </span>
                     <p className="pt-1 text-sm text-slate-300">{step}</p>
