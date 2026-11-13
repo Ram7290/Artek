@@ -11,7 +11,7 @@ export function Protected({ children }: { children: ReactNode }) {
   if (loading) {
     return (
       <div className="grid min-h-dvh place-items-center text-sm text-muted-foreground">
-        Loading…
+        Loading…......
       </div>
     );
   }
