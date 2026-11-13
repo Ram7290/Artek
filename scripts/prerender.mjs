@@ -74,6 +74,21 @@ async function main() {
     console.log("prerendered:", is404 ? "/404.html" : route);
   }
 
+  // Generate client-side SPA fallback HTML for admin routes (so static hosts serve them directly)
+  for (const adminRoute of ["/admin", "/admin/login"]) {
+    const adminHtml = injectSeo(template, {
+      title: "Admin Portal | ARTEK Computers LLC",
+      description: "ARTEK Computers LLC Admin Portal",
+      path: adminRoute,
+      noindex: true,
+      jsonLd: [],
+    });
+    const adminOut = path.join(DIST, ...adminRoute.replace(/^\//, "").split("/"), "index.html");
+    mkdirSync(path.dirname(adminOut), { recursive: true });
+    writeFileSync(adminOut, adminHtml);
+    console.log("generated SPA entry:", adminRoute);
+  }
+
   console.log(`\nDone — ${routes.length} static pages generated in dist/`);
 }
 
