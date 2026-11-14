@@ -3,6 +3,7 @@ import {
   Building2, Store, Home, Warehouse, ConciergeBell, Factory,
 } from "lucide-react";
 import { SectionHeading } from "@/components/common/SectionHeading";
+import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { RevealBox } from "@/components/common/RevealBox";
 import { industries } from "@/data/industries";
 
@@ -21,7 +22,10 @@ export default function Industries() {
     <>
       <section className="bg-navy-950 pb-14 pt-32 text-white sm:pb-16">
         <div className="container-page">
-          <h1 className="text-balance text-3xl font-bold tracking-tight sm:text-4xl">
+          <div className="[&_a]:text-slate-400 [&_span]:text-slate-400">
+            <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Industries", to: "/industries" }]} />
+          </div>
+          <h1 className="mt-6 text-balance text-3xl font-bold tracking-tight sm:text-4xl">
             Industries We Serve
           </h1>
           <p className="mt-4 max-w-2xl text-pretty text-base text-slate-300 sm:text-lg">

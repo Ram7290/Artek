@@ -37,10 +37,19 @@ export interface CompanyDetails {
   heroCredentials: readonly HeroCredential[];
   phoneDisplay: string;
   phoneHref: string;
+  /**
+   * WhatsApp number in international format, digits only (e.g. "97143797128").
+   * `null` hides every WhatsApp entry point on the site.
+   */
+  whatsappNumber: string | null;
   /** Verified office address — null until confirmed by the company */
   address: string | null;
-  /** Confirmed company email — null until confirmed by the company */
+  /** Postcode / PO Box for structured data (JSON-LD) */
+  postalCode: string | null;
+  /** General enquiries email */
   email: string | null;
+  /** Sales / quotes email — may be the same as `email` */
+  salesEmail: string | null;
   businessHours: string | null;
   socials: { label: string; url: string }[];
   /** Production domain used for canonical URLs, sitemap and JSON-LD */
@@ -65,8 +74,15 @@ export const company: CompanyDetails = {
   ],
   phoneDisplay: "+971 4 379 7128",
   phoneHref: "tel:+97143797128",
-  address: null, // ← populate with the verified office address
-  email: null, // ← populate with the confirmed company email
+  // ⚠ TEMPORARY TEST NUMBER — the developer's personal mobile (+91 85472 77570),
+  // used only to verify that lead routing works end to end.
+  // BEFORE LAUNCH: replace with ARTEK's verified WhatsApp Business number.
+  whatsappNumber: "971505513139",
+  address: "P.O. Box 112280, Al Rafa Road, Computer Street, Bur Dubai, Dubai, UAE",
+  postalCode: "112280",
+  email: "info@artekteam.com",
+  // salesEmail: "sales@artekteam.com", // ← hidden from the site per request
+  salesEmail: null,
   businessHours: null, // ← populate with confirmed operating hours
   socials: [], // ← populate with verified links only
   siteUrl: "https://artekcomputer.com",

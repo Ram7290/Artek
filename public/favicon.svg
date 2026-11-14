@@ -1,5 +1,46 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#0A0A0B"/>
-  <path d="M18 46 L32 16 L46 46" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M24.5 35 h15" stroke="#A3A3A3" stroke-width="5" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="512" height="512">
+  <defs>
+    <radialGradient id="sphereGrad" cx="56%" cy="34%" r="62%" fx="56%" fy="34%">
+      <stop offset="0%" stop-color="#8a8f96" />
+      <stop offset="18%" stop-color="#4e5258" />
+      <stop offset="45%" stop-color="#1c1e21" />
+      <stop offset="82%" stop-color="#08090a" />
+      <stop offset="100%" stop-color="#181a1d" />
+    </radialGradient>
+    <linearGradient id="backRingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0095ff" />
+      <stop offset="40%" stop-color="#00bfff" />
+      <stop offset="72%" stop-color="#0055cc" />
+      <stop offset="100%" stop-color="#041e5c" />
+    </linearGradient>
+    <linearGradient id="underRibbonGrad" x1="0%" y1="0%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="#062266" />
+      <stop offset="45%" stop-color="#0077ee" />
+      <stop offset="85%" stop-color="#00aaff" />
+      <stop offset="100%" stop-color="#0044aa" />
+    </linearGradient>
+    <linearGradient id="arrowFaceGrad" x1="20%" y1="85%" x2="80%" y2="12%">
+      <stop offset="0%" stop-color="#0048b8" />
+      <stop offset="32%" stop-color="#0084ff" />
+      <stop offset="68%" stop-color="#00c8ff" />
+      <stop offset="100%" stop-color="#7ce8ff" />
+    </linearGradient>
+    <linearGradient id="arrowBevelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0066dd" />
+      <stop offset="55%" stop-color="#004cb8" />
+      <stop offset="100%" stop-color="#00358a" />
+    </linearGradient>
+    <linearGradient id="arrowHighlightGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0099ff" stop-opacity="0.3" />
+      <stop offset="60%" stop-color="#5ce1ff" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#ccf7ff" stop-opacity="0.95" />
+    </linearGradient>
+  </defs>
+  <path d="M 103 37.5 C 128 29, 147 33, 147 54 C 147 71, 136 86, 129 93 L 124 77 C 134 68, 141 58, 141 48 C 141 36, 126 33, 106 39.5 Z" fill="url(#backRingGrad)" />
+  <circle cx="83" cy="80" r="54" fill="url(#sphereGrad)" />
+  <path d="M 42 82 C 29 97, 25 113, 33 121 C 40 128, 52 128, 63 125 L 59 122 C 47 123, 37 120, 34 112 C 31 103, 36 91, 45 84 Z" fill="url(#underRibbonGrad)" />
+  <path d="M 32 108 C 30 118, 36 125, 49 125 C 54 125, 59 124, 63 123 L 58 119 C 51 120, 42 119, 37 113 C 34 110, 33 107, 32 108 Z" fill="#0080ff" />
+  <path d="M 87 33 L 87 43 L 54 96 L 43 96 L 41 83 L 45 84 L 46 93 L 84 35 Z" fill="url(#arrowBevelGrad)" />
+  <path d="M 87 33 L 21.5 55.5 L 28 63.5 C 12 80, 7 104, 18 121 C 24 130, 36 133, 49 128 C 36 130, 27 124, 26 113 C 25 101, 32 90, 42 82 L 44 93 L 87 33 Z" fill="url(#arrowFaceGrad)" />
+  <path d="M 87 33 L 21.5 55.5 L 28 63.5 C 22 70, 17 77, 14.5 85 C 33 67, 58 50, 87 33 Z" fill="url(#arrowHighlightGrad)" />
 </svg>

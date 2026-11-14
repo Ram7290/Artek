@@ -20,8 +20,12 @@ export function SEOHead() {
   useEffect(() => {
     document.title = seo.title;
 
-    const setMeta = (selector: string, attr: "name" | "property", key: string, content: string) => {
+    const setMeta = (selector: string, attr: "name" | "property", key: string, content: string | undefined) => {
       let el = document.head.querySelector<HTMLMetaElement>(selector);
+      if (!content) {
+        el?.remove();
+        return;
+      }
       if (!el) {
         el = document.createElement("meta");
         el.setAttribute(attr, key);
@@ -35,6 +39,9 @@ export function SEOHead() {
     setMeta('meta[property="og:description"]', "property", "og:description", seo.description);
     setMeta('meta[property="og:type"]', "property", "og:type", seo.ogType ?? "website");
     setMeta('meta[property="og:url"]', "property", "og:url", seo.path);
+    /* article timestamps only exist on blog posts; drop them on other routes */
+    setMeta('meta[property="article:published_time"]', "property", "article:published_time", seo.publishedTime);
+    setMeta('meta[property="article:modified_time"]', "property", "article:modified_time", seo.modifiedTime);
 
     let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (!link) {

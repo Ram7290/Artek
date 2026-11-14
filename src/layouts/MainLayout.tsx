@@ -2,6 +2,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { EnquiryWidget } from "@/components/common/EnquiryWidget";
 import { SEOHead } from "@/components/common/SEOHead";
 import { getLenis, initLenis } from "@/lib/lenis";
 
@@ -26,6 +27,7 @@ export function MainLayout() {
         <Outlet />
       </main>
       <Footer />
+      <EnquiryWidget />
     </div>
   );
 }

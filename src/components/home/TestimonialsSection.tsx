@@ -1,120 +1,170 @@
 import { useState } from "react";
-import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SectionHeading } from "@/components/common/SectionHeading";
 import { RevealBox } from "@/components/common/RevealBox";
-import { testimonials } from "@/data/testimonials";
 import { cn } from "@/lib/utils";
-
-const VISIBLE_AT_ONCE = { base: 1, lg: 3 } as const;
+import { testimonials } from "@/data/testimonials";
+import type { Testimonial } from "@/types";
 
 /**
- * Homepage testimonials — paged carousel of client quotes.
- * Dummy data lives in src/data/testimonials.ts; swap in real quotes later.
- * Controls: prev/next buttons + dot pagination; pauses-free, CSS-free paging
- * so it stays robust under SSR/prerender.
+ * Homepage — client quotes, one at a time.
+ *
+ * A single featured quote with a round client portrait, plus a round-avatar
+ * rail to jump between clients. No cards, stars or borders: the quote is the
+ * layout, the portrait is the proof.
+ *
+ * ⚠ The quotes in src/data/testimonials.ts are PLACEHOLDER data. Add a square
+ * `image` per entry once you have the client's permission; entries without
+ * one fall back to a monogram, never a broken image.
  */
+function initialsOf(name: string) {
+  const parts = name.trim().split(/\s+/);
+  const first = parts[0]?.[0] ?? "";
+  const last = parts.length > 1 ? parts[parts.length - 1][0] : "";
+  return (first + last).toUpperCase();
+}
+
+/** Round portrait — photo when supplied, monogram otherwise. */
+function Avatar({ person, className }: { person: Testimonial; className?: string }) {
+  if (person.image) {
+    return (
+      <img
+        src={person.image}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        className={cn(
+          "shrink-0 rounded-full object-cover grayscale ring-1 ring-white/20",
+          className,
+        )}
+      />
+    );
+  }
+  return (
+    <span
+      aria-hidden="true"
+      className={cn(
+        "grid shrink-0 place-items-center rounded-full bg-white/[0.06] font-display font-medium text-text-muted ring-1 ring-white/15",
+        className,
+      )}
+    >
+      {initialsOf(person.name)}
+    </span>
+  );
+}
+
 export function TestimonialsSection() {
-  const perPage = VISIBLE_AT_ONCE.lg;
-  const pageCount = Math.max(1, Math.ceil(testimonials.length / perPage));
-  const [page, setPage] = useState(0);
+  const [index, setIndex] = useState(0);
+  const [announcement, setAnnouncement] = useState("");
+  const count = testimonials.length;
 
-  const go = (dir: 1 | -1) => setPage((p) => (p + dir + pageCount) % pageCount);
+  if (!count) return null;
 
-  // widen grid to page-sized slices so the visible set stays stable
-  const start = page * perPage;
-  const visible = testimonials.slice(start, start + perPage);
+  const active = testimonials[index % count];
+
+  const select = (next: number) => {
+    const target = (next + count) % count;
+    setIndex(target);
+    // Only the short summary is announced — never the whole quote.
+    setAnnouncement(`Testimonial ${target + 1} of ${count}: ${testimonials[target].name}`);
+  };
 
   return (
-    <section
-      className="border-y border-white/5 bg-slate-safe py-16 sm:py-24"
-      aria-labelledby="testimonials-heading"
-    >
+    <section className="border-y border-white/[0.06] band" aria-labelledby="testimonials-heading">
       <div className="container-page">
-        <SectionHeading
-          eyebrow="Client Stories"
-          title="What Our Clients Say"
-          description="Real feedback from businesses and homeowners across Dubai and the UAE."
-        />
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16 xl:gap-24">
+          <SectionHeading
+            id="testimonials-heading"
+            align="left"
+            eyebrow="Client Stories"
+            title="What clients say after the work is done."
+            className="lg:sticky lg:top-28 lg:self-start"
+          />
 
-        <div className="relative mt-12">
-          <ul
-            className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6"
-            aria-live="polite"
-            aria-label={`Testimonials, page ${page + 1} of ${pageCount}`}
-          >
-            {visible.map((t, i) => (
-              <RevealBox as="li" key={t.id} delay={(i % 3) * 90}>
-                <figure className="group flex h-full flex-col rounded-2xl border border-white/10 bg-mist p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-white/25 hover:shadow-card-hover sm:p-7">
-                  <Quote
-                    className="size-7 text-white/20 transition-colors duration-300 group-hover:text-white/40"
-                    aria-hidden="true"
-                  />
-                  <div
-                    className="mt-3 flex items-center gap-0.5"
-                    role="img"
-                    aria-label={`Rated ${t.rating} out of 5 stars`}
-                  >
-                    {Array.from({ length: 5 }, (_, s) => (
-                      <Star
-                        key={s}
-                        className={cn(
-                          "size-4",
-                          s < t.rating ? "fill-amber-400 text-amber-400" : "text-white/20",
-                        )}
-                        aria-hidden="true"
-                      />
-                    ))}
-                  </div>
-                  <blockquote className="mt-3 flex-1 text-[15px] leading-relaxed text-ink/85">
-                    “{t.quote}”
-                  </blockquote>
-                  <figcaption className="mt-5 border-t border-white/10 pt-4">
-                    <p className="text-sm font-semibold text-ink">{t.name}</p>
-                    <p className="mt-0.5 text-xs leading-snug text-slate-400">
-                      {t.role} · {t.company}
-                    </p>
-                  </figcaption>
-                </figure>
-              </RevealBox>
-            ))}
-          </ul>
-
-          {pageCount > 1 && (
-            <div className="mt-8 flex items-center justify-center gap-4">
-              <button
-                type="button"
-                onClick={() => go(-1)}
-                aria-label="Previous testimonials"
-                className="inline-flex size-10 items-center justify-center rounded-full border border-white/15 bg-mist text-ink transition-colors hover:border-white/40 hover:bg-mist-2"
+          <RevealBox className="min-w-0">
+            <figure key={active.id} className="animate-fade-up">
+              <span
+                aria-hidden="true"
+                className="block font-display text-6xl leading-[0.7] text-white/15"
               >
-                <ChevronLeft className="size-5" aria-hidden="true" />
-              </button>
-              <div className="flex items-center gap-2" role="tablist" aria-label="Testimonial pages">
-                {Array.from({ length: pageCount }, (_, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    role="tab"
-                    aria-selected={i === page}
-                    aria-label={`Go to testimonials page ${i + 1}`}
-                    onClick={() => setPage(i)}
-                    className={cn(
-                      "h-2 rounded-full transition-all duration-300",
-                      i === page ? "w-7 bg-white" : "w-2 bg-white/25 hover:bg-white/50",
-                    )}
-                  />
-                ))}
+                &ldquo;
+              </span>
+              <blockquote
+                id="testimonial-quote"
+                className="mt-4 max-w-2xl text-pretty text-[clamp(1.35rem,1.05rem+1.1vw,2rem)] font-medium leading-[1.42] tracking-[-0.01em] text-text"
+              >
+                {active.quote}
+              </blockquote>
+              <figcaption className="mt-8 flex items-center gap-4">
+                <Avatar person={active} className="size-16 text-lg" />
+                <div>
+                  <p className="text-sm font-semibold text-text">{active.name}</p>
+                  <p className="mt-0.5 text-xs leading-snug text-text-muted">
+                    {active.role} · {active.company}
+                  </p>
+                </div>
+              </figcaption>
+            </figure>
+
+            <div className="mt-8 flex flex-wrap items-center justify-between gap-5 border-t border-white/10 pt-6">
+              <div className="flex items-center gap-2.5" role="group" aria-label="Select a testimonial">
+                {testimonials.map((person, i) => {
+                  const isActive = person.id === active.id;
+                  return (
+                    <button
+                      key={person.id}
+                      type="button"
+                      onClick={() => select(i)}
+                      aria-label={`Show testimonial from ${person.name}`}
+                      aria-current={isActive ? "true" : undefined}
+                      aria-controls="testimonial-quote"
+                      className={cn(
+                        "rounded-full transition-opacity duration-300 focus-visible:opacity-100",
+                        isActive
+                          ? "opacity-100 ring-2 ring-text ring-offset-2 ring-offset-surface"
+                          : "opacity-40 hover:opacity-90",
+                      )}
+                    >
+                      <Avatar person={person} className="size-9 text-[11px]" />
+                    </button>
+                  );
+                })}
               </div>
-              <button
-                type="button"
-                onClick={() => go(1)}
-                aria-label="Next testimonials"
-                className="inline-flex size-10 items-center justify-center rounded-full border border-white/15 bg-mist text-ink transition-colors hover:border-white/40 hover:bg-mist-2"
-              >
-                <ChevronRight className="size-5" aria-hidden="true" />
-              </button>
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => select(index - 1)}
+                  aria-label="Previous testimonial"
+                  aria-controls="testimonial-quote"
+                  className="inline-flex size-10 items-center justify-center rounded-full border border-white/15 text-text transition-colors hover:border-white/40 hover:bg-white/[0.04]"
+                >
+                  <ChevronLeft className="size-4" aria-hidden="true" />
+                </button>
+                <span
+                  aria-hidden="true"
+                  className="min-w-16 text-center font-display text-sm tabular-nums text-text-muted"
+                >
+                  {String((index % count) + 1).padStart(2, "0")}
+                  <span className="mx-1 text-white/25">/</span>
+                  {String(count).padStart(2, "0")}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => select(index + 1)}
+                  aria-label="Next testimonial"
+                  aria-controls="testimonial-quote"
+                  className="inline-flex size-10 items-center justify-center rounded-full border border-white/15 text-text transition-colors hover:border-white/40 hover:bg-white/[0.04]"
+                >
+                  <ChevronRight className="size-4" aria-hidden="true" />
+                </button>
+              </div>
             </div>
-          )}
+
+            <p role="status" className="sr-only">
+              {announcement}
+            </p>
+          </RevealBox>
         </div>
       </div>
     </section>

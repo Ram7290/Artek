@@ -13,6 +13,10 @@ export interface SeoMeta {
 export interface PageSeo extends SeoMeta {
   path: string;
   jsonLd?: readonly JsonLdObject[];
+  /** article:published_time (blog posts) */
+  publishedTime?: string;
+  /** article:modified_time (blog posts) */
+  modifiedTime?: string;
 }
 
 export type JsonLdObject = Record<string, unknown>;
@@ -50,7 +54,13 @@ export interface Testimonial {
   name: string;
   role: string;
   company: string;
-  /** 1–5, rendered as stars */
+  /**
+   * Square client portrait (path under /public, e.g.
+   * "/images/testimonials/ahmed-al-farsi.jpg"). Optional — without it the
+   * avatar renders as a round monogram, so nothing ever shows a broken image.
+   */
+  image?: string;
+  /** 1–5. Not currently rendered — the section uses quotes, not star ratings. */
   rating: 1 | 2 | 3 | 4 | 5;
 }
 
@@ -147,6 +157,16 @@ export interface ProductCategory {
   items: readonly string[];
 }
 
+/** One step in the homepage "How we work" process (see src/data/process.ts) */
+export interface ProcessStep {
+  /** stable key */
+  id: string;
+  title: string;
+  /** short timing label shown beside the title, e.g. "Before work starts" */
+  when: string;
+  description: string;
+}
+
 export type NavItem = {
   label: string;
   to: string;
@@ -156,3 +176,64 @@ export type NavItem = {
     description?: string;
   }[];
 };
+
+/* ── Insights / blog ──────────────────────────────────────────────────── */
+
+/** Byline for articles (see src/data/authors.ts). */
+export interface Author {
+  id: string;
+  name: string;
+  role: string;
+  bio: string;
+  /** optional square portrait; falls back to a monogram */
+  image?: string;
+}
+
+/**
+ * One block of article body copy. Content is typed data rather than MDX so it
+ * renders identically in the browser and in the prerenderer with no extra
+ * build tooling. Inline `**bold**` and `[label](/path)` are supported.
+ */
+export type PostBlock =
+  | { type: "p"; text: string }
+  | { type: "h2"; id: string; text: string }
+  | { type: "h3"; text: string }
+  | { type: "ul"; items: readonly string[] }
+  | { type: "ol"; items: readonly string[] }
+  | { type: "quote"; text: string; cite?: string }
+  | { type: "callout"; title: string; text: string }
+  | { type: "table"; head: readonly string[]; rows: readonly (readonly string[])[] }
+  | {
+      type: "image";
+      src: string;
+      alt: string;
+      width: number;
+      height: number;
+      caption?: string;
+    };
+
+/** Blog article (see src/data/blog.ts). */
+export interface BlogPost {
+  /** stable key */
+  id: string;
+  slug: string;
+  title: string;
+  /** standfirst shown under the title and in listings */
+  dek: string;
+  category: string;
+  tags: readonly string[];
+  authorId: string;
+  /** ISO date (YYYY-MM-DD) */
+  publishedAt: string;
+  updatedAt?: string;
+  /** pinned to the top of /blog */
+  featured?: boolean;
+  /** large word on the typographic cover plate */
+  coverWord: string;
+  body: readonly PostBlock[];
+  faqs?: readonly Faq[];
+  relatedServices: readonly ServiceId[];
+  seo?: Partial<SeoMeta>;
+  /** drafts never render, prerender, list or enter the sitemap */
+  status: "draft" | "needs-review" | "published";
+}

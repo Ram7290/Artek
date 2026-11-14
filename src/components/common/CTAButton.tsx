@@ -30,9 +30,9 @@ export const CTAButton = forwardRef<HTMLAnchorElement, { href: string; children:
 export const ArrowCTA = ({ children, to, className }: { children: React.ReactNode; to: string; className?: string }) => (
   <Link
     to={to}
-    className={cn("group inline-flex items-center gap-1.5 text-sm font-semibold text-accent-600 transition-colors hover:text-accent-700", className)}
+    className={cn("group inline-flex items-center gap-1.5 border-b border-white/20 pb-1 text-sm font-semibold text-text transition-colors hover:border-white/60", className)}
   >
     {children}
-    <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+    <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
   </Link>
 );

@@ -7,6 +7,11 @@ import type { Testimonial } from "@/types";
  * scaffolding so the layout can be reviewed. Replace with real client quotes
  * (with permission) before production, and consider flagging each entry with
  * a verification status like `trustClaims` uses in src/data/company.ts.
+ *
+ * Avatars: the `image` paths below point to illustrated placeholder faces in
+ * public/images/testimonials/. Replace each with a real square client portrait
+ * (200×200 or larger) once you have permission to use their photo. Removing
+ * `image` falls back to a round monogram rather than a broken frame.
  */
 export const testimonials: readonly Testimonial[] = [
   {
@@ -16,6 +21,7 @@ export const testimonials: readonly Testimonial[] = [
     name: "Ahmed Al Farsi",
     role: "Facilities Manager",
     company: "Marina Gate Offices, Dubai",
+    image: "/images/testimonials/avatar-1.svg",
     rating: 5,
   },
   {
@@ -25,6 +31,7 @@ export const testimonials: readonly Testimonial[] = [
     name: "Priya Nair",
     role: "Operations Head",
     company: "Retail Chain, Deira",
+    image: "/images/testimonials/avatar-2.svg",
     rating: 5,
   },
   {
@@ -34,6 +41,7 @@ export const testimonials: readonly Testimonial[] = [
     name: "Khalid Mansour",
     role: "Villa Owner",
     company: "Palm Jumeirah Residence",
+    image: "/images/testimonials/avatar-3.svg",
     rating: 4,
   },
   {
@@ -43,6 +51,7 @@ export const testimonials: readonly Testimonial[] = [
     name: "Daniel D'Souza",
     role: "Warehouse Director",
     company: "Logistics Firm, JAFZA",
+    image: "/images/testimonials/avatar-4.svg",
     rating: 5,
   },
   {
@@ -52,6 +61,7 @@ export const testimonials: readonly Testimonial[] = [
     name: "Sara Iqbal",
     role: "IT Manager",
     company: "Corporate Office, Business Bay",
+    image: "/images/testimonials/avatar-5.svg",
     rating: 5,
   },
   {
@@ -61,6 +71,7 @@ export const testimonials: readonly Testimonial[] = [
     name: "Omar Haddad",
     role: "Procurement Officer",
     company: "Trading Company, Bur Dubai",
+    image: "/images/testimonials/avatar-6.svg",
     rating: 4,
   },
 ];

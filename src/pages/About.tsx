@@ -1,4 +1,4 @@
-import { Cctv, Timer, Lightbulb } from "lucide-react";
+import { Cctv, Timer, Lightbulb, MapPin } from "lucide-react";
 import { company } from "@/data/company";
 import { coreServices } from "@/data/services";
 import { industries } from "@/data/industries";
@@ -7,33 +7,9 @@ import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
-/**
- * About page. Only verified facts + claims supplied in the client brief.
- * Placeholders are explicitly marked TODO(Artek) in the source.
- */
-const LanguagesIcon = (props: { className?: string }) => (
-  <svg
-    className={props.className}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={1.75}
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-  >
-    <path d="m5 8 6 6" />
-    <path d="m4 14 6-6 2-3" />
-    <path d="M2 5h12" />
-    <path d="M7 2h1" />
-    <path d="m22 22-5-10-5 10" />
-    <path d="M14 18h6" />
-  </svg>
-);
-
 const MILESTONES = [
   { icon: Timer, title: "15+ Years of Service", body: "Serving businesses and residents across the UAE technology market." },
-  { icon: LanguagesIcon, title: "Dubai-Based Team", body: "Engineers and support on the ground — no overseas call centres." },
+  { icon: MapPin, title: "Dubai-Based Team", body: "Engineers and support on the ground — no overseas call centres." },
   { icon: Cctv, title: "Integrated Systems Focus", body: "IT, networking, surveillance and communication delivered as one coherent solution." },
   { icon: Lightbulb, title: "Practical Solutions", body: "Recommendations sized to the site and the workload — not showroom stock clearing." },
 ];
@@ -69,7 +45,7 @@ export default function About() {
               </p>
               <p className="mt-4 leading-relaxed text-slate-300">
                 {/* TODO(Artek): confirm founding year and premises history before publishing */}
-                Our scope covers eight core services: {coreServices.map((s) => s.title.toLowerCase()).join(", ")} —
+                Our scope covers eight core services: {coreServices.map((s) => s.title).join(", ")} —
                 delivered for customers across {industries.length} industries and the UAE&apos;s
                 business community.
               </p>
@@ -126,7 +102,7 @@ export default function About() {
                 </div>
                 <div>
                   <dt className="text-slate-400">Location</dt>
-                  <dd className="font-medium text-ink">{company.emirateOfOperation}</dd>
+                  <dd className="font-medium text-ink">{company.address ?? company.emirateOfOperation}</dd>
                 </div>
                 <div>
                   <dt className="text-slate-400">Phone</dt>
@@ -134,6 +110,21 @@ export default function About() {
                     <a href={company.phoneHref} className="text-accent-600 hover:underline">{company.phoneDisplay}</a>
                   </dd>
                 </div>
+                {/* <div>
+                  <dt className="text-slate-400">Email</dt>
+                  <dd className="font-medium text-ink">
+                    {company.email && (
+                      <a href={`mailto:${company.email}`} className="block text-accent-600 hover:underline">
+                        {company.email}
+                      </a>
+                    )}
+                    {company.salesEmail && company.salesEmail !== company.email && (
+                      <a href={`mailto:${company.salesEmail}`} className="block text-accent-600 hover:underline">
+                        {company.salesEmail}
+                      </a>
+                    )}
+                  </dd>
+                </div> */}
               </dl>
             </div>
             <div className="rounded-xl border border-white/10 p-6">

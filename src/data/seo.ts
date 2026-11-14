@@ -4,6 +4,8 @@ import { coreServices, getServiceBySlug, services } from "./services.ts";
 import { locations, getLocationBySlug, getLocationService } from "./locations.ts";
 import { getIndustryBySlug, industries } from "./industries.ts";
 import { homeFaqs } from "./faqs.ts";
+import { getPostBySlug, publishedPosts } from "./blog.ts";
+import { getAuthor } from "./authors.ts";
 
 /**
  * ─────────────────────────────────────────────────────────────────────────────
@@ -62,10 +64,10 @@ const STATIC_PAGE_META: Record<string, PageSeo> = {
   },
   "/blog": {
     path: canonical("/blog"),
-    title: "Blog | ARTEK Computers LLC",
+    title: "Insights | CCTV, Networking & IT Guidance for UAE Businesses | ARTEK",
     description:
-      "Insights on IT infrastructure, surveillance and networking for UAE businesses from the ARTEK team.",
-    ogType: "article",
+      "Practical guidance from ARTEK's engineers on CCTV compliance, office networks, Wi-Fi coverage, maintenance contracts and business IT in Dubai and the UAE.",
+    ogType: "website",
   },
   "/privacy-policy": {
     path: canonical("/privacy-policy"),
@@ -113,7 +115,11 @@ function addressNode(): Record<string, unknown> {
     addressLocality: "Dubai",
     addressCountry: "AE",
   };
-  if (company.address) addr.streetAddress = company.address;
+  if (company.address) {
+    addr.streetAddress = company.address;
+    addr.addressRegion = "Dubai";
+  }
+  if (company.postalCode) addr.postalCode = company.postalCode;
   return addr;
 }
 
@@ -263,8 +269,55 @@ function industrySeo(path: string): PageSeo | undefined {
   };
 }
 
-/** Resolve the SEO bundle for any route (pure — also used in Node SSR). */
-export function resolvePageSeo(path: string): PageSeo {
+function blogPostJsonLd(post: NonNullable<ReturnType<typeof getPostBySlug>>): JsonLdObject {
+  const author = getAuthor(post.authorId);
+  const url = canonical(`/blog/${post.slug}`);
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.dek,
+    url,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt ?? post.publishedAt,
+    articleSection: post.category,
+    keywords: post.tags.join(", "),
+    inLanguage: "en-AE",
+    author: { "@type": "Organization", name: author?.name ?? company.legalName, url: company.siteUrl },
+    publisher: {
+      "@type": "Organization",
+      name: company.legalName,
+      url: company.siteUrl,
+      logo: { "@type": "ImageObject", url: `${company.siteUrl}/favicon.svg` },
+    },
+  };
+}
+
+function blogPostSeo(path: string): PageSeo | undefined {
+  const slug = path.replace("/blog/", "").replace(/\/$/, "");
+  const post = getPostBySlug(slug);
+  if (!post) return undefined;
+  return {
+    path: canonical(path),
+    title: post.seo?.title ?? `${post.title} | ARTEK Insights`,
+    description: post.seo?.description ?? post.dek,
+    ogType: "article",
+    publishedTime: post.publishedAt,
+    modifiedTime: post.updatedAt ?? post.publishedAt,
+    jsonLd: [
+      blogPostJsonLd(post),
+      breadcrumbsJsonLd([
+        { name: "Home", url: company.siteUrl },
+        { name: "Insights", url: `${company.siteUrl}/blog` },
+        { name: post.title, url: canonical(path) },
+      ]),
+      ...(post.faqs?.length ? [faqJsonLd(post.faqs)] : []),
+    ],
+  };
+}
+
+/** Resolve the SEO bundle for any route (pure — also used in Node SSR). */export function resolvePageSeo(path: string): PageSeo {
   if (STATIC_PAGE_META[path]) {
     const base = STATIC_PAGE_META[path]!;
     const jsonLd: JsonLdObject[] = [breadcrumbsJsonLd([{ name: "Home", url: company.siteUrl }])];
@@ -287,6 +340,10 @@ export function resolvePageSeo(path: string): PageSeo {
     const found = industrySeo(path);
     if (found) return found;
   }
+  if (path.startsWith("/blog/")) {
+    const found = blogPostSeo(path);
+    if (found) return found;
+  }
   return fallbackSeo(path);
 }
 
@@ -307,6 +364,7 @@ const LOCATION_PATHS = locations.flatMap((l) => {
   return [`/locations/${l.slug}`, ...combos];
 });
 const INDUSTRY_PATHS = industries.map((i) => `/industries/${i.slug}`);
+const BLOG_PATHS = publishedPosts.map((p) => `/blog/${p.slug}`);
 
 /** All indexable paths — drives prerendering and sitemap generation. */
 export const ALL_SEO_PATHS: readonly string[] = [
@@ -314,4 +372,5 @@ export const ALL_SEO_PATHS: readonly string[] = [
   ...SOLUTION_PATHS,
   ...LOCATION_PATHS,
   ...INDUSTRY_PATHS,
+  ...BLOG_PATHS,
 ];

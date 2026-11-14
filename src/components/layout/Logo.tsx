@@ -2,53 +2,33 @@ import { Link } from "react-router-dom";
 import { company } from "@/data/company";
 import { cn } from "@/lib/utils";
 
-/** ARTEK logo: client PNG mark + wordmark text. */
-export function Logo({
-  dark = false,
-  className,
-}: {
-  dark?: boolean;
-  className?: string;
-}) {
+/**
+ * ARTEK logo — client PNG mark (400×80 canvas, content ≈ 279×53 with a
+ * 59px left inset).
+ *
+ * Sized by height only: 30px on mobile (as originally), 44px from `md` up,
+ * which still fits inside the 60px nav bar with room to breathe. `max-w-none`
+ * is required because the global image reset otherwise clamps the mark.
+ */
+export function Logo({ className }: { className?: string }) {
   return (
     <Link
       to="/"
       className={cn(
-        "flex shrink-0 items-center gap-3 whitespace-nowrap focus-visible:outline-none",
+        "flex shrink-0 items-center whitespace-nowrap rounded-md focus-visible:outline-none",
         className,
       )}
       aria-label={`${company.name} — home`}
     >
       <img
         src="/images/log_ma.png"
-        alt=""
-        aria-hidden="true"
-        width={56}
-        height={56}
+        alt={company.name}
+        width={400}
+        height={80}
         draggable={false}
-        className={cn(
-          "h-12 w-12 shrink-0 select-none object-contain sm:h-50 sm:w-50",
-          dark ? "opacity-100" : "opacity-90",
-        )}
+        decoding="async"
+        className="h-[30px] w-auto max-w-none select-none md:h-[44px]"
       />
-      {/* <span className="flex flex-col leading-none">
-        <span
-          className={cn(
-            "text-xl font-extrabold tracking-wide",
-            dark ? "text-ink" : "text-white",
-          )}
-        >
-          ARTEK
-        </span>
-        <span
-          className={cn(
-            "mt-1 text-[11px] font-medium uppercase tracking-[0.28em]",
-            dark ? "text-ink/50" : "text-slate-400",
-          )}
-        >
-          Computers LLC
-        </span>
-      </span> */}
     </Link>
   );
 }

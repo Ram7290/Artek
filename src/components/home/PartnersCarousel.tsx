@@ -1,59 +1,74 @@
-import { partnerGroups } from "@/data/industries";
 import { cn } from "@/lib/utils";
 
 /**
- * Partner brand chips (homepage Section 4) — small chips on a moving marquee.
+ * Partner brand logos (homepage) — logo tiles on a moving marquee.
  *
- * IMPORTANT: brand names are client-brief placeholders pending real logo
- * assets AND confirmed partner status — see data/industries.ts. Replace the
- * chip span with <img src="/logos/brand.webp"> once assets exist.
+ * The marks are shown as wordmarks on the page field (no tiles, no borders):
+ * logo rows look most intentional when the marks themselves do the work and
+ * the edge of the band is masked into the background.
  *
- * One shared CSS keyframe animation (marquee—~60s: the track is much wider
- * than the old 9-logo version), duplicated track for a seamless loop, pauses
- * on hover, disabled under prefers-reduced-motion.
+ * IMPORTANT: these logo files are client-supplied PixelLab exports whose
+ * exact brand identities are NOT yet confirmed — filenames are positional
+ * (`logo-1..8`), not brand names, so nothing here asserts a partnership.
+ * Before production: (1) confirm each logo's brand + partner status with
+ * ARTEK, (2) rename files to brand slugs and add brand names to `alt`,
+ * (3) re-export the blank tile (original `...1081517.png` was empty white).
+ *
+ * One shared CSS keyframe animation, duplicated track for a seamless loop,
+ * pauses on hover, disabled under prefers-reduced-motion.
  */
 
-type TrackItem =
-  | { key: string; kind: "label"; text: string }
-  | { key: string; kind: "chip"; text: string };
+/** Positional logo assets — order = original upload order, minus the blank. */
+const LOGOS = [
+  "/images/brands/logo-1.png",
+  "/images/brands/logo-2.png",
+  "/images/brands/logo-3.png",
+  "/images/brands/logo-4.png",
+  "/images/brands/logo-5.png",
+  "/images/brands/logo-6.png",
+  "/images/brands/logo-7.png",
+  "/images/brands/logo-8.png",
+] as const;
 
-const trackBase: TrackItem[] = partnerGroups.flatMap((g) => [
-  { key: `lbl:${g.label}`, kind: "label" as const, text: g.label },
-  ...g.brands.map((b) => ({ key: `chip:${g.label}:${b}`, kind: "chip" as const, text: b })),
-]);
+const trackBase = [...LOGOS];
 const track = [...trackBase, ...trackBase];
-
-const CHIP =
-  "inline-flex items-center rounded-full border border-hairline bg-mist-2 px-3.5 py-1.5 text-[13px] font-semibold text-ink/70 select-none transition-colors duration-300 hover:border-accent-600/60 hover:text-accent-600";
-const LABEL =
-  "shrink-0 select-none py-1.5 text-[10.5px] font-extrabold uppercase tracking-[0.18em] text-ink/30";
 
 export function PartnersCarousel() {
   return (
-    <section className="bg-slate-safe py-14" aria-label="Technology partners">
+    <section
+      className="border-y border-white/[0.06] band-tight"
+      aria-label="Technology partners"
+    >
       <div className="container-page">
-        <h2 className="text-center text-2xl font-bold text-ink sm:text-3xl">Trusted Technology Partners</h2>
-        <p className="mt-3 text-center text-sm text-ink/70 sm:text-base">
-          Working with established technology brands to deliver reliable IT and security solutions.
+        <p className="text-center text-[11px] font-bold uppercase tracking-[0.2em] text-text-muted">
+          Trusted technology partners
         </p>
       </div>
-      <div
-        className="relative mt-9 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"
-      >
+      <div className="relative mt-7 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
         <ul
-          className="marquee-track mx-auto flex w-max animate-marquee items-center gap-2.5 px-6"
+          className="marquee-track flex w-max animate-marquee items-center gap-14 px-6 sm:gap-20"
           style={{ animationDuration: "60s" }}
-          aria-label="Technology brands ARTEK works with, by category"
+          aria-label="Technology brand logos ARTEK works with"
         >
-          {track.map((item, i) => (
-            <li key={item.key} aria-hidden={i >= trackBase.length} className={cn("flex shrink-0 items-center", item.kind === "chip" && "px-1")}>
-              {item.kind === "chip" ? (
-                <span className={CHIP} /* wordmark placeholder — swap for image asset when available */>
-                  {item.text}
-                </span>
-              ) : (
-                <span className={LABEL}>{item.text}</span>
-              )}
+          {track.map((src, i) => (
+            <li
+              key={`${src}#${i}`}
+              aria-hidden={i >= trackBase.length}
+              className="flex shrink-0 items-center"
+            >
+              <span className={cn("flex h-10 items-center justify-center select-none opacity-70 transition-opacity duration-300 hover:opacity-100 sm:h-11")}>
+                <img
+                  src={src}
+                  alt=""
+                  role="presentation"
+                  width={220}
+                  height={72}
+                  loading="eager"
+                  decoding="async"
+                  className="h-full w-auto max-w-[9rem] object-contain grayscale"
+                  draggable={false}
+                />
+              </span>
             </li>
           ))}
         </ul>

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { ServiceCard } from "@/components/common/ServiceCard";
 import { RevealBox } from "@/components/common/RevealBox";
 import { coreServices, services } from "@/data/services";
@@ -10,7 +11,10 @@ export default function Solutions() {
     <>
       <section className="bg-navy-950 pb-14 pt-32 text-white sm:pb-16">
         <div className="container-page">
-          <h1 className="text-balance text-3xl font-bold tracking-tight sm:text-4xl">
+          <div className="[&_a]:text-slate-400 [&_span]:text-slate-400">
+            <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Solutions", to: "/solutions" }]} />
+          </div>
+          <h1 className="mt-6 text-balance text-3xl font-bold tracking-tight sm:text-4xl">
             Our IT &amp; Security Solutions
           </h1>
           <p className="mt-4 max-w-2xl text-pretty text-base text-slate-300 sm:text-lg">
@@ -19,7 +23,7 @@ export default function Solutions() {
         </div>
       </section>
 
-      <section className="bg-slate-safe py-14 sm:py-20">
+      <section className="bg-mist-2 py-14 sm:py-20">
         <div className="container-page">
           <h2 className="sr-only">Core solutions</h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -36,7 +40,7 @@ export default function Solutions() {
               <li key={s.slug}>
                 <Link
                   to={`/solutions/${s.slug}`}
-                  className="block rounded-lg border border-white/10 bg-mist-2 p-4 text-sm font-medium text-slate-200 transition-colors hover:border-accent-600/50 hover:text-accent-600"
+                  className="block rounded-lg border border-white/10 p-4 text-sm font-medium text-slate-200 transition-colors hover:border-accent-600/50 hover:text-accent-600"
                 >
                   {s.name}
                   <span className="mt-1 block text-xs font-normal text-slate-400">{s.shortDescription.slice(0, 64)}…</span>

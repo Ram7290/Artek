@@ -41,7 +41,7 @@ export default function Products() {
         </div>
       </header>
 
-      <section className="bg-slate-safe py-14 sm:py-20">
+      <section className="bg-mist-2 py-14 sm:py-20">
         <div className="container-page">
           <SectionHeading
             align="left"
@@ -53,7 +53,7 @@ export default function Products() {
               const Icon = ICONS[cat.icon] ?? Monitor;
               return (
                 <RevealBox as="li" key={cat.slug} delay={(i % 3) * 70}>
-                  <div className="flex h-full flex-col rounded-xl border border-white/10 bg-mist-2 p-6">
+                  <div className="flex h-full flex-col rounded-xl border border-white/10 p-6">
                     <span className="flex size-11 items-center justify-center rounded-lg bg-accent-600/10">
                       <Icon className="size-5 text-accent-600" aria-hidden="true" />
                     </span>
@@ -73,7 +73,7 @@ export default function Products() {
             })}
           </ul>
 
-          <div className="mt-12 rounded-xl border border-white/10 bg-mist-2 p-6 text-center sm:p-10">
+          <div className="mt-12 rounded-xl border border-white/10 bg-slate-safe p-6 text-center sm:p-10">
             <h2 className="text-xl font-bold text-ink">Need a specific model or a bulk order?</h2>
             <p className="mx-auto mt-2 max-w-xl text-sm text-slate-300">
               Tell us the requirement — a single device or a full office rollout — and we&apos;ll quote

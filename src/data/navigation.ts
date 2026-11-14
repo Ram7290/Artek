@@ -8,7 +8,8 @@ export const navItems: readonly NavItem[] = [
   { label: "Home", to: "/" },
   { label: "Company", to: "/about" },
   { label: "Solutions", to: "/solutions" },
+  { label: "Industries", to: "/industries" },
   { label: "Products", to: "/products" },
-  { label: "Blog", to: "/blog" },
+  { label: "Insights", to: "/blog" },
   { label: "Contact", to: "/contact" },
 ];

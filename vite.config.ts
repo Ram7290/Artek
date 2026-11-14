@@ -6,8 +6,18 @@ import path from "node:path";
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
+    preserveSymlinks: true,
     alias: {
       "@": path.resolve(__dirname, "./src"),
+    },
+  },
+  server: {
+    port: 5173,
+    proxy: {
+      "/api": {
+        target: "http://localhost:4000",
+        changeOrigin: true,
+      },
     },
   },
   build: {
@@ -22,6 +32,7 @@ export default defineConfig({
           "vendor-ui": [
             "@radix-ui/react-accordion",
             "@radix-ui/react-dialog",
+            "@radix-ui/react-label",
             "@radix-ui/react-select",
             "@radix-ui/react-slot",
             "lucide-react",

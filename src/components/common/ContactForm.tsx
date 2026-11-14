@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { CheckCircle2, AlertTriangle, Info, Loader2, Send } from "lucide-react";
 import { enquirySchema, type EnquiryValues } from "@/lib/validation";
-import { submitEnquiry, isDemoMode } from "@/lib/submissions";
+import { submitEnquiry } from "@/lib/submissions";
 import { Input, Textarea } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
@@ -35,7 +35,6 @@ export function ContactForm({ className }: { className?: string }) {
   const [result, setResult] = useState<null | { kind: "ok" | "demo" | "error"; message?: string }>(null);
   const emirate = watch("emirate");
   const service = watch("service");
-  const demoMode = isDemoMode();
 
   const onSubmit = handleSubmit(async (values) => {
     setResult(null);
@@ -70,17 +69,6 @@ export function ContactForm({ className }: { className?: string }) {
 
   return (
     <form onSubmit={onSubmit} noValidate className={className} aria-label="Request a quote">
-      {demoMode && (
-        <div className="mb-5 flex items-start gap-3 rounded-lg border border-blue-200 bg-blue-50 p-4 text-sm text-slate-300" role="note">
-          <Info className="mt-0.5 size-4 shrink-0 text-accent-600" aria-hidden="true" />
-          <p>
-            <strong className="font-semibold">Demo mode:</strong> form submission is not yet connected
-            to ARTEK&apos;s inbox. Please call <a className="font-medium text-accent-600 underline-offset-2 hover:underline" href="tel:+97143797128">+971 4 379 7128</a>{" "}
-            for enquiries, or contact us once form wiring is live.
-          </p>
-        </div>
-      )}
-
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="fullName" className={labelCls}>

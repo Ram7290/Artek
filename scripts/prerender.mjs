@@ -59,6 +59,9 @@ async function main() {
         description: seo.description,
         path: seo.path,
         noindex: false,
+        ogType: seo.ogType ?? "website",
+        publishedTime: seo.publishedTime,
+        modifiedTime: seo.modifiedTime,
         jsonLd: seo.jsonLd ?? [],
         preloadImage: route === "/" ? heroPreloadImage.image : undefined,
       });
@@ -71,6 +74,21 @@ async function main() {
     console.log("prerendered:", is404 ? "/404.html" : route);
   }
 
+  // Generate client-side SPA fallback HTML for admin routes (so static hosts serve them directly)
+  for (const adminRoute of ["/admin", "/admin/login"]) {
+    const adminHtml = injectSeo(template, {
+      title: "Admin Portal | ARTEK Computers LLC",
+      description: "ARTEK Computers LLC Admin Portal",
+      path: adminRoute,
+      noindex: true,
+      jsonLd: [],
+    });
+    const adminOut = path.join(DIST, ...adminRoute.replace(/^\//, "").split("/"), "index.html");
+    mkdirSync(path.dirname(adminOut), { recursive: true });
+    writeFileSync(adminOut, adminHtml);
+    console.log("generated SPA entry:", adminRoute);
+  }
+
   console.log(`\nDone — ${routes.length} static pages generated in dist/`);
 }
 
@@ -78,20 +96,23 @@ function escapeHtml(s) {
   return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-function injectSeo(html, { title, description, path: pagePath, jsonLd, noindex, preloadImage }) {
+function injectSeo(html, { title, description, path: pagePath, jsonLd, noindex, ogType = "website", publishedTime, modifiedTime, preloadImage }) {
   const safeTitle = escapeHtml(title);
   const safeDesc = escapeHtml(description);
   /* replace the template's fallback title + description + canonical */
   html = html
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${safeTitle}</title>`)
     .replace(/<meta\s+name="description"[\s\S]*?\/>/, `<meta name="description" content="${safeDesc}" />`)
-    .replace(/<link\s+rel="canonical"[\s\S]*?\/>/, `<link rel="canonical" href="${escapeHtml(pagePath)}" />`);
+    .replace(/<link\s+rel="canonical"[\s\S]*?\/>/, `<link rel="canonical" href="${escapeHtml(pagePath)}" />`)
+    .replace(/<meta\s+property="og:type"[\s\S]*?\/>/, `<meta property="og:type" content="${escapeHtml(ogType)}" />`);
 
   /* per-route OG tags */
   const og =
     `<meta property="og:title" content="${safeTitle}" />\n    ` +
     `<meta property="og:description" content="${safeDesc}" />\n    ` +
     `<meta property="og:url" content="${escapeHtml(pagePath)}" />\n    ` +
+    (publishedTime ? `<meta property="article:published_time" content="${escapeHtml(publishedTime)}" />\n    ` : "") +
+    (modifiedTime ? `<meta property="article:modified_time" content="${escapeHtml(modifiedTime)}" />\n    ` : "") +
     (noindex ? `<meta name="robots" content="noindex" />` : "");
 
   const ld = (jsonLd ?? [])

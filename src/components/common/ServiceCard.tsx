@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import {
-  ArrowRight,
+  ArrowUpRight,
   Cctv,
   Cloud,
   Monitor,
@@ -25,10 +25,10 @@ const ICONS = {
 
 /**
  * Solution card — flat editorial style.
- * Deliberately the opposite of the IndustriesSection cards: no visual
- * header, no photography, no halo. Identity comes from typography:
- * ghost index number, small icon tile that inverts on hover, and a
- * single stretched title link (footer row is decorative).
+ * Identity comes from typography: ghost index, a small icon tile that fills
+ * in on hover, and a single stretched title link. The card sits one step
+ * above its band (`surface-2` band → `surface` card) so it separates by
+ * contrast as well as by its hairline.
  */
 export function ServiceCard({
   service,
@@ -38,41 +38,37 @@ export function ServiceCard({
   index?: number;
 }) {
   const Icon = ICONS[service.icon as keyof typeof ICONS] ?? Shield;
-  const to = `/solutions/${service.slug}`;
 
   return (
-    <article className="group relative flex h-full flex-col rounded-2xl border border-white/10 bg-mist-2 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/25 hover:shadow-(--shadow-card-hover) focus-within:border-white/40">
+    <article className="group relative flex h-full flex-col rounded-(--radius-card) border border-white/[0.08] bg-surface p-6 transition-[border-color,background-color] duration-300 hover:border-white/20 hover:bg-[#0D0D0F] focus-within:border-white/35">
       <div className="flex items-start justify-between gap-4">
-        <span className="flex size-12 items-center justify-center rounded-xl bg-white/10 text-white ring-1 ring-inset ring-white/15 transition-colors duration-300 group-hover:bg-white group-hover:text-black">
-          <Icon className="size-6" strokeWidth={1.75} aria-hidden="true" />
+        <span className="flex size-11 items-center justify-center rounded-lg border border-white/10 text-text-muted transition-colors duration-300 group-hover:border-paper group-hover:bg-paper group-hover:text-surface">
+          <Icon className="size-5" strokeWidth={1.6} aria-hidden="true" />
         </span>
         <span
           aria-hidden="true"
-          className="text-sm font-bold tabular-nums tracking-widest text-white/25"
+          className="font-display text-[13px] font-medium tabular-nums tracking-wider text-white/25"
         >
           {String(index + 1).padStart(2, "0")}
         </span>
       </div>
-      <h3 className="mt-5 text-lg font-semibold leading-snug text-ink">
+      <h3 className="mt-6 text-[17px] font-semibold leading-snug tracking-tight text-text">
         <Link
-          to={to}
-          className="transition-colors after:absolute after:inset-0 after:rounded-2xl hover:text-accent-600"
+          to={`/solutions/${service.slug}`}
+          className="transition-colors after:absolute after:inset-0 after:rounded-(--radius-card)"
         >
           {service.title}
         </Link>
       </h3>
-      <p className="mt-2 flex-1 text-sm leading-relaxed text-ink/70">
+      <p className="mt-2 flex-1 text-[13.5px] leading-relaxed text-text-muted">
         {service.shortDescription}
       </p>
       <span
         aria-hidden="true"
-        className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-white"
+        className="mt-6 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-text-muted transition-colors group-hover:text-text"
       >
-        Explore solution
-        <ArrowRight
-          className="size-4 transition-transform duration-300 group-hover:translate-x-1"
-          aria-hidden="true"
-        />
+        Explore
+        <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
       </span>
     </article>
   );

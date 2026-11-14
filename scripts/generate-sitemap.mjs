@@ -17,7 +17,8 @@ const prioritized = (r) => {
     return "0.9";
   if (r.startsWith("/solutions/")) return "0.8";
   if (r.startsWith("/locations/") || r.startsWith("/industries/")) return "0.7";
-  if (["/about", "/contact", "/products", "/industries", "/locations", "/solutions"].includes(r)) return "0.8";
+  if (r.startsWith("/blog/")) return "0.6";
+  if (["/about", "/contact", "/products", "/industries", "/locations", "/solutions", "/blog"].includes(r)) return "0.8";
   return "0.5";
 };
 

@@ -1,43 +1,125 @@
 @import "tailwindcss";
 @import "@fontsource-variable/manrope";
+@import "@fontsource-variable/fraunces";
 
 @theme {
+  /* Body / UI face. */
   --font-sans: "Manrope Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  /* Display face — section titles only. A high-contrast serif against the
+     grotesk body is what separates "startup template" from "corporate
+     premium"; it is used for h1/h2, never for body copy or small caps. */
+  --font-display: "Fraunces Variable", ui-serif, Georgia, "Times New Roman", serif;
 
-  /* Black & white (monochrome) theme — neutral dark surfaces, light grays,
-     pure-white accents. `mist` = page background (near-black), `mist-2` =
-     elevated dark surface, `ink` = primary LIGHT text (semantic flip),
-     `hairline` = translucent gray borders. Accents carry hierarchy through
-     opacity and weight only — no chromatic color. */
-  --color-mist: #0A0A0B;
-  --color-mist-2: #161618;
-  --color-ink: #F5F5F5;
-  --color-ink-soft: #A3A3A3;
-  --color-azure: #FFFFFF;
+  /* Legacy scale — inner pages still reference these. They are ALIASES of the
+     semantic tokens below, not separate greys, so a colour change happens in
+     one place. Remove a name here once no page references it. */
+  --color-mist: var(--color-surface);
+  --color-mist-2: var(--color-surface-2);
+  --color-ink: var(--color-text);
+  --color-ink-soft: var(--color-text-muted);
+  --color-azure: var(--color-paper);
   --color-azure-deep: #D4D4D4;
-  --color-hairline: #2A2A2C;
-
-  /* Brand neutral scale — inner pages */
+  --color-hairline: var(--color-line);
   --color-navy-950: #050505;
-  --color-navy-900: #0A0A0B;
-  --color-navy-850: #161618;
+  --color-navy-900: var(--color-surface);
+  --color-navy-850: var(--color-surface-2);
   --color-navy-700: #212123;
   --color-accent-700: #B0B0B0;
-  --color-accent-600: #F0F0F0;
+  --color-accent-600: var(--color-text);
   --color-accent-500: #E0E0E0;
   --color-accent-400: #D4D4D4;
-  --color-slate-safe: #0A0A0B;
+  --color-slate-safe: var(--color-surface);
 
+  /* ── Semantic palette (monochrome, 4 roles) ─────────────────────────────
+     surface  – page field, deepest      (was mist / navy-950 / slate-safe)
+     surface-2– raised band, one step up (was mist-2)
+     paper    – the single warm light surface (process band on the homepage)
+     line / text / text-muted – structure and copy.
+     Deliberately no chromatic accent: hierarchy is spacing, type and
+     contrast only. */
+  --color-surface: #0A0A0B;
+  --color-surface-2: #161618;
+  --color-paper: #F7F6F4;
+  --color-line: #2A2A2C;
+  --color-text: #F5F5F5;
+  --color-text-muted: #A1A1AA;
+
+  /* Design scale — one radius and two shadow levels across the whole site. */
+  --radius-card: 0.875rem;
   --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 16px rgb(0 0 0 / 0.35);
-  --shadow-card-hover: 0 2px 4px rgb(0 0 0 / 0.45), 0 14px 36px rgb(0 0 0 / 0.5);
+  --shadow-card-hover: var(--shadow-lift);
+  --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.45), 0 18px 40px rgb(0 0 0 / 0.5);
+
+  /* Motion — two behaviours only: entrance and a 1px lift. */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 
   --animate-float: float 7s ease-in-out infinite;
   --animate-float-slow: float 10s ease-in-out infinite;
   --animate-blink: blink 1.6s step-end infinite;
-  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-up: fade-up 0.7s var(--ease-out-soft) both;
   --animate-fade-in: fade-in 0.8s ease both;
   --animate-marquee: marquee 38s linear infinite;
   --animate-aurora: aurora 80s ease-in-out infinite;
+
+  /* Admin portal tokens */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* Vertical rhythm: three deliberate band heights instead of one flat
+   py-16 sm:py-24 on every section. `band` is the default, `band-lg` is a
+   breathing beat, `band-tight` is a connective strip. */
+@utility band {
+  padding-block: 4rem;
+}
+@utility band-lg {
+  padding-block: 5rem;
+}
+@utility band-tight {
+  padding-block: 2.5rem;
+}
+@media (min-width: 640px) {
+  .band {
+    padding-block: 6rem;
+  }
+  .band-lg {
+    padding-block: 8rem;
+  }
+  .band-tight {
+    padding-block: 3.25rem;
+  }
+}
+
+/* Section title — the display face, used via SectionHeading. */
+@utility display-title {
+  font-family: var(--font-display);
+  font-variation-settings: "SOFT" 0, "WONK" 0, "opsz" 40;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.08;
+  text-wrap: balance;
 }
 
 @keyframes float {
@@ -125,28 +207,33 @@ html {
 }
 
 body {
-  @apply bg-white font-sans text-slate-900 antialiased;
+  @apply bg-surface font-sans text-text antialiased;
   text-rendering: optimizeLegibility;
 }
 
-img,
-svg,
-video {
-  max-width: 100%;
-  height: auto;
+/* Native controls, scrollbars and overscroll use the page field, not white. */
+:root {
+  color-scheme: dark;
 }
+
+/* NOTE: do not add a global `img { height: auto }` rule here. Tailwind v4's
+   preflight already ships `img, video { max-width:100%; height:auto }` in the
+   base layer; a duplicate outside the layer would beat every utility class in
+   the cascade and silently break sized images (this cost the navbar logo). */
 
 /* Focus visibility for keyboard users */
 :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
   outline: 2px solid #F5F5F5;
-  outline-offset: 2px;
+  outline-offset: 3px;
   border-radius: 4px;
 }
 
-::selection {
-  background: #F5F5F5;
-  color: #010057;
+/* Light ("paper") surface: the global light focus ring would be invisible,
+   so flip every focusable control inside it to a dark ring. */
+.on-paper :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+  outline-color: #0A0A0B;
 }
+
 
 .container-page {
   max-width: 87.5rem;
@@ -173,7 +260,10 @@ video {
   }
 }
 
-/* Reveal-on-scroll (Intersection Observer driven) */
+/* Reveal-on-scroll (Intersection Observer driven).
+   Decorative only, so it fails open: if scripting is unavailable (the hook
+   never runs and `is-visible` is never added) content must not stay hidden.
+   `<html>` gets `.js` from an inline script in index.html before first paint. */
 .reveal {
   opacity: 0;
   transform: translateY(18px);
@@ -185,11 +275,21 @@ video {
   opacity: 1;
   transform: none;
 }
+:root:not(.js) .reveal {
+  opacity: 1;
+  transform: none;
+}
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+}
+@media print {
+  .reveal {
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -198,17 +298,196 @@ video {
   animation-play-state: paused;
 }
 
+/* ── Article prose (insights / blog) ──────────────────────────────────────
+   Long-form copy renders on the paper surface; all element styling lives
+   here so the article template stays structural. Sentence-case Fraunces for
+   headings, Manrope for body at a comfortable measure. */
+.article-prose {
+  color: #3f3f46;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+.article-prose > * + * {
+  margin-top: 1.5rem;
+}
+.article-prose > h2 {
+  margin-top: 3rem;
+}
+.article-prose > h3 {
+  margin-top: 2.25rem;
+}
+.article-prose > ul,
+.article-prose > ol {
+  margin-top: 1.5rem;
+}
+.article-prose p {
+  max-width: 40rem;
+  text-wrap: pretty;
+}
+.article-prose > :first-child {
+  font-size: 1.1875rem;
+  line-height: 1.7;
+  color: #18181b;
+}
+.article-prose h2 {
+  font-family: var(--font-display);
+  font-variation-settings: "SOFT" 0, "WONK" 0, "opsz" 32;
+  font-weight: 500;
+  font-size: clamp(1.45rem, 1.2rem + 0.9vw, 1.85rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: #0a0a0b;
+  text-wrap: balance;
+}
+.article-prose h3 {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #0a0a0b;
+}
+.article-prose ul,
+.article-prose ol {
+  max-width: 40rem;
+  padding-left: 1.25rem;
+}
+.article-prose ul {
+  list-style: none;
+}
+.article-prose ol {
+  list-style: decimal;
+}
+.article-prose li + li {
+  margin-top: 0.55rem;
+}
+.article-quote {
+  max-width: 40rem;
+  margin-block: 2.75rem;
+  padding-left: 1.5rem;
+  border-left: 2px solid #0a0a0b;
+}
+.article-quote blockquote p {
+  font-family: var(--font-display);
+  font-variation-settings: "SOFT" 0, "WONK" 0, "opsz" 32;
+  font-size: clamp(1.3rem, 1.1rem + 0.7vw, 1.6rem);
+  line-height: 1.45;
+  color: #0a0a0b;
+}
+.article-quote figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.8125rem;
+  color: #71717a;
+}
+.article-callout {
+  max-width: 40rem;
+  margin-block: 2.5rem;
+  padding: 1.5rem 1.5rem 1.5rem 1.75rem;
+  border-left: 3px solid #0a0a0b;
+  background: #efeeea;
+}
+.article-callout .article-callout-title {
+  margin-bottom: 0.4rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #0a0a0b;
+}
+.article-table-wrap {
+  margin-block: 2.5rem;
+  overflow-x: auto;
+  border: 1px solid rgb(10 10 11 / 0.12);
+}
+.article-prose table {
+  width: 100%;
+  min-width: 32rem;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+.article-prose th {
+  padding: 0.85rem 1.1rem;
+  text-align: left;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #0a0a0b;
+  background: #efeeea;
+  border-bottom: 1px solid rgb(10 10 11 / 0.15);
+}
+.article-prose td {
+  padding: 0.85rem 1.1rem;
+  vertical-align: top;
+  border-bottom: 1px solid rgb(10 10 11 / 0.08);
+}
+.article-prose tbody tr:last-child td {
+  border-bottom: 0;
+}
+.article-figure {
+  max-width: 46rem;
+}
+.article-figure img {
+  width: 100%;
+  height: auto;
+  border: 1px solid rgb(10 10 11 / 0.1);
+}
+.article-figure figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.8125rem;
+  color: #71717a;
+}
+
 /* Skip link */
 .skip-link {
   position: absolute;
   left: -9999px;
   top: 0;
   z-index: 100;
-  background: #0B1220;
-  color: #fff;
+  background: #F7F6F4;
+  color: #0A0A0B;
   padding: 0.5rem 1rem;
   border-radius: 0 0 0.5rem 0;
 }
 .skip-link:focus {
   left: 0;
+}
+
+/* ── Admin portal theme boundary ─────────────────────────────────────────── */
+.admin-portal {
+  color-scheme: light;
+  --radius: 0.625rem;
+
+  --background: #f7f6f4;
+  --foreground: #0a0a0b;
+
+  --card: #ffffff;
+  --card-foreground: #0a0a0b;
+
+  --popover: #ffffff;
+  --popover-foreground: #0a0a0b;
+
+  --primary: #0a0a0b;
+  --primary-foreground: #f7f6f4;
+
+  --secondary: #efeeea;
+  --secondary-foreground: #0a0a0b;
+
+  --muted: #efeeea;
+  --muted-foreground: #6b6b70;
+
+  --accent: #efeeea;
+  --accent-foreground: #0a0a0b;
+
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+
+  --border: #e4e2dd;
+  --input: #e4e2dd;
+  --ring: #0a0a0b;
+
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+.admin-portal * {
+  border-color: var(--border);
 }

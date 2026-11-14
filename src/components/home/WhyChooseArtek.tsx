@@ -48,54 +48,57 @@ const FEATURES = [
 
 export function WhyChooseArtek() {
   return (
-    <section
-      className="relative bg-slate-safe py-16 sm:py-24"
-      aria-labelledby="why-heading"
-    >
-      <div className="container-page relative">
-        <SectionHeading
-          align="center"
-          eyebrow="Why Choose Artek"
-          title="A Technology Partner Built on Trust"
-          description="Choosing the right technology partner matters. We bring together security expertise, IT infrastructure and a broad range of technology solutions to support businesses and properties across the UAE."
-        />
+    <section className="relative band-lg" aria-labelledby="why-heading">
+      <div className="container-page">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16 xl:gap-24">
+          <SectionHeading
+            id="why-heading"
+            align="left"
+            eyebrow="Why Artek"
+            title="A technology partner, not a supplier."
+            description="Choosing the right partner matters more than choosing the right camera. We bring security expertise, IT infrastructure and support into one accountable team — so nobody has to coordinate three vendors to keep a building running."
+            className="lg:sticky lg:top-28 lg:self-start"
+          />
 
-        <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-          {FEATURES.map((f, i) => {
-            const num = String(i + 1).padStart(2, "0");
-            const Icon = f.icon;
-            return (
-              <RevealBox
-                as="li"
-                key={f.title}
-                delay={(i % 3) * 90}
-                className={
-                  i === FEATURES.length - 1
-                    ? "sm:col-span-2 lg:col-span-1"
-                    : undefined
-                }
-              >
-                <div className="group relative h-full overflow-hidden rounded-2xl border border-white/10 bg-mist-2 p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-accent-600/50 hover:shadow-card-hover sm:p-7">
-                  {/* Hairline sweep on hover */}
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-accent-400/70 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                  />
-                  <div className="flex items-start justify-between">
-                    <span className="flex size-11 items-center justify-center rounded-xl bg-azure/10 ring-1 ring-inset ring-azure/25">
-                      <Icon className="size-5 text-accent-600" strokeWidth={1.75} aria-hidden="true" />
-                    </span>
-                    <span className="text-sm font-semibold tabular-nums text-slate-300 transition-colors duration-300 group-hover:text-accent-600/60">
-                      {num}
-                    </span>
+          <ol className="border-t border-white/10">
+            {FEATURES.map((f, i) => {
+              const num = String(i + 1).padStart(2, "0");
+              const Icon = f.icon;
+              return (
+                <RevealBox
+                  as="li"
+                  key={f.title}
+                  delay={(i % 3) * 60}
+                  className="group border-b border-white/10"
+                >
+                  <div className="grid grid-cols-[auto_1fr] gap-5 py-7 sm:gap-7">
+                    <div className="flex flex-col items-start gap-4">
+                      <span
+                        aria-hidden="true"
+                        className="font-display text-sm font-medium tabular-nums text-white/30 transition-colors duration-300 group-hover:text-paper"
+                      >
+                        {num}
+                      </span>
+                      <Icon
+                        className="size-5 text-text-muted transition-colors duration-300 group-hover:text-text"
+                        strokeWidth={1.6}
+                        aria-hidden="true"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold tracking-tight text-text sm:text-xl">
+                        {f.title}
+                      </h3>
+                      <p className="mt-2 max-w-xl text-pretty text-sm leading-relaxed text-text-muted sm:text-[15px]">
+                        {f.body}
+                      </p>
+                    </div>
                   </div>
-                  <h3 className="mt-5 text-lg font-semibold text-ink">{f.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-300">{f.body}</p>
-                </div>
-              </RevealBox>
-            );
-          })}
-        </ul>
+                </RevealBox>
+              );
+            })}
+          </ol>
+        </div>
       </div>
     </section>
   );
