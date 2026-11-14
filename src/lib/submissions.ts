@@ -2,17 +2,19 @@ import type { EnquiryValues } from "@/lib/validation";
 
 /**
  * ─────────────────────────────────────────────────────────────────────────────
- *  LEAD SUBMISSION SERVICE
- *  Wire this to ARTEK's backend, email provider or CRM later:
+ *  LEAD SUBMISSION SERVICE — powered by Web3Forms
  *
- *    1. Set VITE_ENQUIRY_ENDPOINT (e.g. https://forms.company.com/artek)
- *       in the environment (.env / hosting config).
- *    2. The endpoint receives a JSON POST:
- *         { fullName, companyName, email, phone, service, emirate, message, source }
- *    3. Until an endpoint is configured the form runs in DEMO MODE — it never
+ *  Submits directly to the Web3Forms API (https://api.web3forms.com/submit).
+ *  No backend required — the access key is a public client-side key.
+ *
+ *    1. Set VITE_WEB3FORMS_ACCESS_KEY in the environment (.env.local).
+ *    2. The API receives a JSON POST with the form fields + access_key.
+ *    3. Until the key is configured the form runs in DEMO MODE — it never
  *       fakes a successful send; it shows the demo notice instead.
  * ─────────────────────────────────────────────────────────────────────────────
  */
+
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 
 export type SubmissionResult =
   | { status: "ok" }
@@ -21,28 +23,49 @@ export type SubmissionResult =
 
 export type EnquiryPayload = EnquiryValues & { source: string };
 
-export const getEnquiryEndpoint = (): string | undefined =>
-  import.meta.env.VITE_ENQUIRY_ENDPOINT || undefined;
+export const getWeb3FormsKey = (): string | undefined =>
+  import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || undefined;
 
-export const isDemoMode = (): boolean => !getEnquiryEndpoint();
+export const isDemoMode = (): boolean => !getWeb3FormsKey();
 
 export async function submitEnquiry(payload: EnquiryPayload): Promise<SubmissionResult> {
-  const endpoint = getEnquiryEndpoint();
-  if (!endpoint) {
+  const accessKey = getWeb3FormsKey();
+  if (!accessKey) {
     // Demo mode: nothing is sent anywhere. Never fake success.
     console.info("[ARTEK demo] enquiry captured locally (not sent):", payload);
     return { status: "demo" };
   }
+
   try {
-    const res = await fetch(endpoint, {
+    const res = await fetch(WEB3FORMS_ENDPOINT, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        access_key: accessKey,
+        subject: `Website enquiry — ${payload.service} (${payload.fullName})`,
+        from_name: "Artek Website",
+        name: payload.fullName,
+        email: payload.email,
+        phone: payload.phone,
+        company: payload.companyName || "—",
+        service: payload.service,
+        emirate: payload.emirate,
+        message: payload.message,
+        source: payload.source,
+        botcheck: payload.botcheck ?? "",
+      }),
     });
-    if (!res.ok) {
-      return { status: "error", message: `The server could not accept the enquiry (error ${res.status}). Please call us instead.` };
+
+    const data = await res.json();
+
+    if (data.success) {
+      return { status: "ok" };
     }
-    return { status: "ok" };
+
+    return {
+      status: "error",
+      message: data.message || "The enquiry could not be sent. Please call us instead.",
+    };
   } catch {
     return {
       status: "error",

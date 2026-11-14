@@ -21,6 +21,8 @@ export const enquirySchema = z.object({
     .min(1, "Please select the service you need."),
   emirate: z.string().trim().min(1, "Please select your location."),
   message: z.string().trim().min(10, "Please describe your requirement (at least 10 characters).").max(2000, "Message is too long."),
+  /** Honeypot — bots fill every field; humans never see it. */
+  botcheck: z.string().optional(),
 });
 
 export type EnquiryValues = z.infer<typeof enquirySchema>;

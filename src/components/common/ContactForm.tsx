@@ -29,7 +29,7 @@ export function ContactForm({ className }: { className?: string }) {
   } = useForm<EnquiryValues>({
     resolver: zodResolver(enquirySchema),
     mode: "onBlur",
-    defaultValues: { service: "", emirate: "", companyName: "" },
+    defaultValues: { service: "", emirate: "", companyName: "", botcheck: "" },
   });
 
   const [result, setResult] = useState<null | { kind: "ok" | "demo" | "error"; message?: string }>(null);
@@ -54,8 +54,8 @@ export function ContactForm({ className }: { className?: string }) {
 
   if (result?.kind === "ok") {
     return (
-      <div className={`rounded-xl border border-emerald-200 bg-emerald-50 p-8 text-center ${className ?? ""}`} role="status">
-        <CheckCircle2 className="mx-auto size-10 text-emerald-600" aria-hidden="true" />
+      <div className={`rounded-xl border border-emerald-600/30 bg-emerald-950/30 p-8 text-center ${className ?? ""}`} role="status">
+        <CheckCircle2 className="mx-auto size-10 text-emerald-500" aria-hidden="true" />
         <h3 className="mt-4 text-lg font-semibold text-ink">Enquiry sent</h3>
         <p className="mt-2 text-sm text-slate-300">
           Thank you — our team will get back to you shortly. For urgent matters call +971 4 379 7128.
@@ -69,6 +69,15 @@ export function ContactForm({ className }: { className?: string }) {
 
   return (
     <form onSubmit={onSubmit} noValidate className={className} aria-label="Request a quote">
+      {/* Honeypot — hidden from users, catches bots */}
+      <input
+        type="text"
+        tabIndex={-1}
+        autoComplete="off"
+        className="hidden"
+        aria-hidden="true"
+        {...register("botcheck")}
+      />
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="fullName" className={labelCls}>
@@ -161,7 +170,7 @@ export function ContactForm({ className }: { className?: string }) {
         <p className="mt-4 flex items-start gap-2 rounded-lg border border-blue-200 bg-blue-50 p-4 text-sm text-slate-300" role="status">
           <Info className="mt-0.5 size-4 shrink-0 text-accent-600" aria-hidden="true" />
           Demo mode — your details were validated but <strong className="font-semibold">not sent</strong>. Set
-          the submission endpoint in <code className="rounded bg-mist-2 px-1 py-0.5 text-xs">VITE_ENQUIRY_ENDPOINT</code> to enable live sending.
+          the Web3Forms access key in <code className="rounded bg-mist-2 px-1 py-0.5 text-xs">VITE_WEB3FORMS_ACCESS_KEY</code> to enable live sending.
         </p>
       )}
 
