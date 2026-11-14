@@ -77,11 +77,12 @@ export const company: CompanyDetails = {
   // ⚠ TEMPORARY TEST NUMBER — the developer's personal mobile (+91 85472 77570),
   // used only to verify that lead routing works end to end.
   // BEFORE LAUNCH: replace with ARTEK's verified WhatsApp Business number.
-  whatsappNumber: "918547277570",
+  whatsappNumber: "971505513139",
   address: "P.O. Box 112280, Al Rafa Road, Computer Street, Bur Dubai, Dubai, UAE",
   postalCode: "112280",
   email: "info@artekteam.com",
-  salesEmail: "sales@artekteam.com",
+  // salesEmail: "sales@artekteam.com", // ← hidden from the site per request
+  salesEmail: null,
   businessHours: null, // ← populate with confirmed operating hours
   socials: [], // ← populate with verified links only
   siteUrl: "https://artekcomputer.com",

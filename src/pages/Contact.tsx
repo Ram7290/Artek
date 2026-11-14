@@ -2,7 +2,6 @@ import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { company } from "@/data/company";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { ContactForm } from "@/components/common/ContactForm";
-import { RevealBox } from "@/components/common/RevealBox";
 import { getMapEmbedUrl, MAP_SHARE_URL } from "@/lib/maps";
 
 /**
@@ -59,11 +58,11 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="bg-slate-safe py-14 sm:py-20">
+      <section className="bg-mist-2 py-14 sm:py-20">
         <div className="container-page grid gap-10 lg:grid-cols-[1fr_minmax(0,1.3fr)] lg:gap-14">
           {/* contact information */}
-          <RevealBox className="space-y-5">
-            <div className="rounded-xl border border-white/10 bg-mist-2 p-6">
+          <div className="space-y-5">
+            <div className="rounded-xl border border-white/10 p-6">
               <h2 className="text-lg font-semibold text-ink">Contact information</h2>
               <ul className="mt-5 space-y-4 text-sm">
                 <li className="flex items-center gap-3">
@@ -128,7 +127,7 @@ export default function Contact() {
             </div>
 
             {company.socials.length > 0 && (
-              <div className="rounded-xl border border-white/10 bg-mist-2 p-6">
+              <div className="rounded-xl border border-white/10 p-6">
                 <h2 className="text-sm font-semibold text-ink">Follow us</h2>
                 <ul className="mt-3 flex flex-wrap gap-3">
                   {company.socials.map((s) => (
@@ -145,16 +144,16 @@ export default function Contact() {
             {mapUrl && (
               <MapEmbed url={mapUrl} title={`Map showing the location of ${company.name}`} />
             )}
-          </RevealBox>
+          </div>
 
           {/* quote form */}
-          <RevealBox delay={100} className="rounded-xl border border-white/10 bg-mist-2 p-6 sm:p-8">
+          <div className="rounded-xl border border-white/10 p-6 sm:p-8">
             <h2 className="text-lg font-semibold text-ink">Request a free quote</h2>
             <p className="mt-1 text-sm text-slate-300">
               Fill in the form and our team will respond with a tailored proposal.
             </p>
             <ContactForm className="mt-6" />
-          </RevealBox>
+          </div>
         </div>
       </section>
     </>

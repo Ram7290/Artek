@@ -45,7 +45,7 @@ export default function Blog() {
         </div>
       </header>
 
-      <div className="bg-slate-safe py-14 sm:py-20">
+      <div className="bg-mist-2 py-14 sm:py-20">
         <div className="container-page">
           {featured && active === "All" && (
             <div className="mb-14">
